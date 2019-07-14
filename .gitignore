@@ -1,0 +1,15 @@
+# Django #
+voyager/registry.py
+orbita
+dione/static/dist
+*.log
+*.pot
+*.pyc
+__pycache__
+dione/migrations
+hiperion/migrations
+media
+sudo
+
+#node
+node_modules

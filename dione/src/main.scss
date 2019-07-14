@@ -1,0 +1,375 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis&display=swap');
+
+$section-padding: 3.8rem 0rem 0rem 0rem !default;
+
+$body-background-color: hsl(0, 0%, 96%);
+
+$card-shadow: none;
+$body-line-height: normal;
+$body-family: 'IBM Plex Sans', serif;
+$family-secondary: 'Roboto', sans-serif;
+
+//color items en el menu superior principal
+$navbar-item-color:hsl(250, 71%, 43%);
+$navbar-height: 3.7rem;
+
+$navbar-item-img-max-height: 2.3rem;
+
+$link: hsl(226, 100%, 66%);
+
+$tabs-link-color: hsl(226, 100%, 66%);
+$tabs-link-hover-border-bottom-color: hsl(217, 71%, 53%);
+$tabs-link-active-color: hsl(0, 0%, 21%);
+$tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
+
+@import "~bulma/bulma";
+
+//custom zakokor 01-03-19
+.is-borderless { border:0 }
+.is-border-bottom { border:0;border-bottom:1px solid $grey }
+
+.navbar.is-pegao {
+    //background-color: #0b3a86;
+    //color: #fff;
+    border-bottom:1px solid $grey-lighter;
+}
+
+.is-family-intro {
+  font-family: 'Dosis', serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+}
+.is-family-intro strong {
+  font-weight: 600;
+}
+
+.is-horizontal-center {
+  justify-content: center;
+}
+
+.is-inline-table{display:inline-table !important;} //submit.js
+
+.bd-patreon-button { display:inline-block;position:relative;vertical-align:top; }
+.bd-patreon-button img{ border-radius:4px;display:block;max-height:none!important; }
+.bd-patreon-button:hover::after{ bottom:0;left:0;position:absolute;right:0;top:0;background-color:rgba(0,0,0,.05);border-radius:4px;content:"";display:block; }
+
+.is-text-overflow {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.divider-h {
+  height: 1px;
+  background: hsl(0, 0%, 96%);
+}
+.divider-h.has-background-grey-lighter {
+  background: hsl(0, 0%, 86%);
+}
+
+.button.is-google {
+    background-color: rgb(234, 67, 53);
+    border-color: transparent;
+    color: #fff;
+}
+
+//columns
+.width80 {
+  width:80px;
+}
+.width100 {
+  width:100px;
+}
+.is-square { border-radius1: 0.3rem; border1: 1px solid $grey; margin-lef1t:10px; margin-ri1ght:10px; padding:10px 15px }
+
+.is-size-5-1 {
+    font-size: 1.04rem !important;
+}
+.is-size-6-5 {
+    font-size: 0.9rem !important;
+}
+.has-text-orange {
+  color: #f15a24
+}
+.has-background-orange {
+  background-color: #f15a24
+}
+
+//on desktop
+@media screen and (min-width: $desktop) {
+  .avatar { height: 40px; width:40px; font-size: $size-4; padding1: 7.5px; }
+  .avatar.is-small { height: 42px; width:42px; font-size: $size-6; }
+  .avatar.is-medium { height: 64px; width:64px; font-size: $size-4; }
+  .textarea.is-large {
+      font-size: 1.5rem;
+  }
+  .hero.is-fullheight-with-navbar {
+    min-height: calc(90vh - 3.8rem);
+  }
+  .title.is-auto-3 {
+    font-size: 2rem;
+  }
+}
+//on touch screen
+@media screen and (max-width: $desktop - 1px) {
+  .avatar { height: 40px; width:40px; font-size: $size-6; }
+  .avatar.is-small { height: 32px; width:32px; font-size: $size-6; }
+  .avatar.is-medium { height: 64px; width:64px; }
+  .textarea.is-large {
+      font-size: 1.3rem;
+  }
+  .hero.is-fullheight-with-navbar {
+    min-height: calc(80vh - 3.8rem);
+  }
+  .title.is-auto-3 {
+    font-size: 1.2rem;
+  }
+}
+//.image img.is-square3 { border-radius:  45% 40% 40% 40% ; }
+
+
+.has-border-white { border:3px solid $white }
+
+.has-line-height-15 {
+  line-height: 1.5;
+}
+
+.input_title {
+  border:0;
+  border-radius:0;
+  border-bottom:1px solid #dbdbdb;
+  box-shadow:none;
+}
+
+// spacing helpers settings
+$range-start: 0 !default;
+$range-end: 50 !default;
+$interval: 5 !default;
+$sides: (top, bottom, left, right);
+
+$current: $range-start;
+@while $current <= $range-end {
+  .has-margin-#{$current} {
+    margin: #{$current}px !important
+  }
+
+  .has-padding-#{$current} {
+    padding: #{$current}px !important
+  }
+
+  @each $side in $sides{
+    .has-margin-#{$side}-#{$current} {
+      margin-#{$side}: #{$current}px !important
+    }
+
+    .has-padding-#{$side}-#{$current} {
+      padding-#{$side}: #{$current}px !important
+    }
+  }
+
+  $current: $current + $interval;
+}
+
+.has-top-right {
+    top: 1em;
+    right: 1.5em;
+}
+.has-top-left {
+    top: 1em;
+    left: 1.5em;
+}
+
+//notification
+.notification {
+  position: fixed;
+  z-index: 1000;
+  max-width: 350px;
+}
+
+div.status {
+  background: #C7C3FA;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+table tbody > p {
+    padding: 0.5em 0.75em;
+}
+
+.tag:not(body).is-danger2 {
+    background-color: #da2f47;
+    color: #fff;
+}
+.tag:not(body).is-sky {
+    background-color: #00FFFF;
+    color: #fff;
+}
+.tag:not(body).is-purple {
+    background-color: #7A00FF;
+    color: #fff;
+}
+.tag:not(body).is-light-yellow {
+    background-color: #fbff05;
+    color: #fff;
+}
+
+
+//icons
+.icon-voted{ color: hsl(339, 100%, 46.5%); background-color1: hsl(339, 100%, 46.5%); -moz-border-radius: 50%; border-radius: 50%;}
+
+.icon-svg{height:1rem;width:1rem;background-position:center;background-repeat:no-repeat;background-size:contain;display:inline-block;vertical-align:middle;}
+.icon-pegao,.icon-svg:hover{filter: brightness(0.5) sepia(1) hue-rotate(200deg) saturate(8); }
+.icon-svg.is-meidum {height:2rem;width:2rem;}
+
+.icon-pegar{height:0.9rem;width:0.9rem;background-image:url("/static/img/repegar.svg")}
+
+//emojis
+.em,.em-svg{height:1rem;width:1rem;background-position:center;background-repeat:no-repeat;background-size:contain;display:inline-block;vertical-align:middle}
+.em.is-large {height:2rem;width:2rem;margin:10px}
+.em.is-extra-large {height:3rem;width:3rem;margin:10px}
+
+.em-speech_balloon{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4ac.png")}
+.em-speech_balloon.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4ac.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4ac.svg"),none}
+
+.em-star{background-image:url("https://twemoji.maxcdn.com/2/72x72/2b50.png")}
+.em-star.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/2b50.png");background-image:url("https://twemoji.maxcdn.com/2/svg/2b50.svg"),none}
+
+.em-fire{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f525.png")}
+.em-fire.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f525.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f525.svg"),none}
+
+.em-bulb{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4a1.png")}
+.em-bulb.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4a1.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4a1.svg"),none}
+
+.em-joy{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f602.png")}
+.em-joy.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f602.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f602.svg"),none}
+
+.em-rage{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f621.png")}
+.em-rage.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f621.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f621.svg"),none}
+
+.em-heart{background-image:url("https://twemoji.maxcdn.com/2/72x72/2764.png")}
+.em-heart.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/2764.png");background-image:url("https://twemoji.maxcdn.com/2/svg/2764.svg"),none}
+
+.em-round_pushpin{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4cd.png")}
+.em-round_pushpin.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4cd.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4cd.svg"),none}
+
+.em-bookmark{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f516.png")}
+.em-bookmark.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f516.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f516.svg"),none}
+
+.em-shopping_trolley{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f6d2.png")}
+.em-shopping_trolley.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f6d2.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f6d2.svg"),none}
+
+.em-shallow_pan_of_food{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f958.png")}
+.em-shallow_pan_of_food.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f958.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f958.svg"),none}
+
+.em-gift{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f381.png")}
+.em-gift.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f381.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f381.svg"),none}
+
+.em-thumbsup{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f44d.png")}
+.em-thumbsup.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f44d.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f44d.svg"),none}
+
+.em-thumbsdown{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f44e.png")}
+.em-thumbsdown.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f44e.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f44e.svg"),none}
+
+.em-island{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f3dd.png")}
+.em-island.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f3dd.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f3dd.svg"),none}
+
+.em-smiley{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f603.png")}
+.em-smiley.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f603.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f603.svg"),none}
+
+.em-speaking_head{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f5e3.png")}
+.em-speaking_head.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f5e3.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f5e3.svg"),none}
+
+.em-salad{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f957.png")}
+.em-salad.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f957.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f957.svg"),none}
+
+.em-cupcake{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f9c1.png")}
+.em-cupcake.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f9c1.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f9c1.svg"),none}
+
+.em-cooking{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f373.png")}
+.em-cooking.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f373.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f373.svg"),none}
+
+.em-sandwich{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f96a.png")}
+.em-sandwich.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f96a.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f96a.svg"),none}
+
+.em-tropical_drink{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f379.png")}
+.em-tropical_drink.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f379.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f379.svg"),none}
+
+.em-computer{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4bb.png")}
+.em-computer.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4bb.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4bb.svg"),none}
+
+.em-family{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f46a.png")}
+.em-family.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f46a.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f46a.svg"),none}
+
+.em-woman_lifting_weights{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f3cb-fe0f-200d-2640-fe0f.png")}
+.em-woman_lifting_weights.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f3cb-fe0f-200d-2640-fe0f.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f3cb-fe0f-200d-2640-fe0f.svg"),none}
+
+.em-soccer{background-image:url("https://twemoji.maxcdn.com/2/72x72/26bd.png")}
+.em-soccer.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/26bd.png");background-image:url("https://twemoji.maxcdn.com/2/svg/26bd.svg"),none}
+
+.em-basketball{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f3c0.png")}
+.em-basketball.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f3c0.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f3c0.svg"),none}
+
+.em-hushed{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f62f.png")}
+.em-hushed.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f62f.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f62f.svg"),none}
+
+.em-cry{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f622.png")}
+.em-cry.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f622.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f622.svg"),none}
+
+//tooltip
+.tippy-tooltip.grey-theme {
+  color: $white;
+  font-size: $size-7;
+  padding:0 4px 0 4px;
+  //font-weight: $weight-bold;
+  background-color: $grey;
+  border: 1px solid $white;
+}
+.tippy-tooltip.grey-theme[data-animatefill] {
+  background-color: transparent;
+}
+.tippy-tooltip.grey-theme .tippy-backdrop {
+  background-color: $grey;
+}
+.tippy-tooltip.grey-theme[x-placement^='top'] .tippy-arrow {
+  border-top-color: $grey;
+}
+.tippy-tooltip.grey-theme[x-placement^='bottom'] .tippy-arrow {
+  border-bottom-color: $grey;
+}
+.tippy-tooltip.grey-theme[x-placement^='left'] .tippy-arrow {
+  border-left-color: $grey;
+}
+.tippy-tooltip.grey-theme[x-placement^='right'] .tippy-arrow {
+  border-right-color: $grey;
+}
+
+.tippy-tooltip.orange-theme {
+  color: $white;
+  font-size: $size-7;
+  padding:0 4px 0 4px;
+  //font-weight: $weight-bold;
+  background-color: $orange;
+  border: 1px solid $white;
+}
+.tippy-tooltip.orange-theme[data-animatefill] {
+  background-color: transparent;
+}
+.tippy-tooltip.orange-theme .tippy-backdrop {
+  background-color: $orange;
+}
+.tippy-tooltip.orange-theme[x-placement^='top'] .tippy-arrow {
+  border-top-color: $orange;
+}
+.tippy-tooltip.orange-theme[x-placement^='bottom'] .tippy-arrow {
+  border-bottom-color: $orange;
+}
+.tippy-tooltip.orange-theme[x-placement^='left'] .tippy-arrow {
+  border-left-color: $orange;
+}
+.tippy-tooltip.orange-theme[x-placement^='right'] .tippy-arrow {
+  border-right-color: $orange;
+}

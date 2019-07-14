@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  
+{% endblock %}
+
+{% block content %}
+  <div id="app"></div>
+{% endblock %}
+
+{% block script %}
+{% load static %}
+<script src="{% static "dist/main.bundle.js" %}"></script>
+{% endblock %}

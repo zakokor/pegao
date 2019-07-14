@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión en Pegao{% endblock %}
+
+{% block content %}
+<section class="hero is-medium">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-multiline is-centered">
+        <div class="column is-full has-text-centered">
+          <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-fire"></i></span>
+          <span class="tag is-warning has-padding-5 has-margin-right-5"><i class="em em-star"></i></span>
+          <span class="tag is-success has-padding-5 has-margin-right-5"><i class="em em-clap"></i></span>
+          <span class="tag is-danger has-padding-5 has-margin-right-5"><i class="em em-bulb"></i></span>
+          <span class="tag is-purple has-padding-5 has-margin-right-5"><i class="em em-joy"></i></span>
+          <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-rage"></i></span>
+          <span class="tag is-sky has-padding-5 has-margin-right-5"><i class="em em-heart"></i></span>
+          <span class="tag is-primary has-padding-5 has-margin-right-5"><i class="em em-round_pushpin"></i></span>
+          <span class="tag is-info has-padding-5 has-margin-right-5"><i class="em em-bookmark"></i></span>                  
+        </div>
+        <div class="column is-full has-text-centered has-margin-top-20">
+          <h1 class="title">Inicia sesión para empezar</h1>
+          <h2 class="subtitle"><strong>Pegao</strong> es un espacio para guardar y compartir tus enlaces favoritos con los demás</h2>
+        </div>
+        <div class="column is-full has-text-centered has-margin-top-30">
+          <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+            <span class="icon">
+              <i class="uil uil-google"></i>
+            </span>
+            <span>Ingresa con Google</span>
+          </a>
+        </div>
+        <div class="column is-three-quarters has-text-centered has-margin-top-20">
+          Al usar Pegao, estás aceptando en su totalidad nuestro <a>Decálogo de Conducta</a>, <a>Privacidad</a> y <a>Términos de Servicio</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p class="is-size-7">
+      Pegao is a project created by <a href="https://twitter.com/zakokor" target="_blank">Gonzalo Aragón</a>.
+      Email me for help <a href="mailto:gonza@pegao.com">gonza@pegao.co</a> 
+    </p>
+    <p>
+      <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
+        <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="148" height="36">
+      </a>
+    </p>
+  </div>
+</footer>
+{% endblock %}
