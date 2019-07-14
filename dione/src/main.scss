@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis&display=swap');
 
 $section-padding: 3.8rem 0rem 0rem 0rem !default;
+$footer-padding: 1rem 1.5rem 6rem;
 
 $body-background-color: hsl(0, 0%, 96%);
 
@@ -55,6 +56,20 @@ $tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
 .bd-patreon-button img{ border-radius:4px;display:block;max-height:none!important; }
 .bd-patreon-button:hover::after{ bottom:0;left:0;position:absolute;right:0;top:0;background-color:rgba(0,0,0,.05);border-radius:4px;content:"";display:block; }
 
+svg:not(:root).svg-inline { overflow: visible; }
+svg {
+  max-height: 100%;
+  max-width: 100%;
+}
+.svg-inline {
+  display: inline-block;
+  font-size: inherit;
+  height: 1.3em;
+  overflow: visible;
+  vertical-align: -.125em;
+}
+
+
 .is-text-overflow {
     flex: 1;
     overflow: hidden;
@@ -93,6 +108,15 @@ $tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
 }
 .has-text-orange {
   color: #f15a24
+}
+.has-text-github {
+  color: #333;
+}
+.has-text-twitter {
+  color: #55acee;
+}
+.has-text-patreon {
+  color: #f96854;
 }
 .has-background-orange {
   background-color: #f15a24
