@@ -15,6 +15,14 @@
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "img/apple-touch-icon-144x144.png" %}" />
   <link rel="stylesheet" href="{% static "dist/main.css" %}">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v0.0.4/css/unicons.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142105356-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-142105356-1');
+  </script>
   <title>{% block title %}Pegao - a space to save and share pages{% endblock %}</title>
 </head>
 <body>
