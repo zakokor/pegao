@@ -82,7 +82,7 @@ class Submit extends PureComponent {
     console.log('es la misma columna');
 
     const emojilists = [
-        {
+        /*{
           id: 0,
           list: [
             {
@@ -102,7 +102,7 @@ class Submit extends PureComponent {
               label: 'Fit',
             },
           ]
-        },
+        },*/
         {
           id: 1,
           list: [
