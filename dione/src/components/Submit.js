@@ -215,9 +215,11 @@ class Submit extends PureComponent {
     ).then((result)=>{
       console.log("Post created!");
 
-      if(result.status=='201')
+      if(result.status=='201'){
         this.setState({ sent: true, message: '' });
-      else
+
+        this.props.history.push("/");
+      }else
         this.setState({message: 'There was an error! Try again.', disabled: false});
 
     }).catch(()=>{
