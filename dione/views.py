@@ -29,3 +29,6 @@ def terms(request):
 
 def privacy(request):
       return render(request, 'privacy.html')
+
+def getting_started(request):
+      return render(request, 'articles/how-do-i-paste-a-link.html')

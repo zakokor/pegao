@@ -52,28 +52,15 @@ class UserFeed extends PureComponent {
                           <EmojiFilter />
                         </React.Fragment>;
         }else{
-          message = <div class="content">
-                      <div class='is-flex is-horizontal-center has-margin-top-15'>
-                        <figure class="image is-64x64">
-                          <img src="static/img/1f603.svg" />
-                        </figure>
-                      </div>
-                      <h1>Hi @{me}! Start saving and sharing pages!</h1>
+          message = <div className="content is-medium has-padding-40">
+                      <h3>Hi @{me}!</h3>
                       <p>From now on you can start to paste the links that inspire you and share them with your followers.</p>
-                      <p>Pasting a link is very simple, write in the address bar of the browser <strong>"pegao.co<span className="is-size-6">/</span>"</strong> before the link you want to share and press "Paste".</p>
-                      <div className="has-text-centered has-margin-top-15"><img src="static/img/howtopost.gif" width="500px" /></div>
-                      <h3>How to use lists</h3>
-                      <p>A list —written with a <strong>/</strong> symbol— is a curated group of links. You can create your own lists with your links to easily categorize them.</p>
-                      <ul>
-                        <li>Only one list can be included by post, and we recommend type a list at the end in a post.</li>
-                        <li>You cannot add spaces or punctuation in a list, or it will not work properly.</li>
-                        <li>You can see your own lists, or someone else's, by visiting the profile page. Note that lists are public and anyone can view them.</li>
-                      </ul>
-                      <p className="has-text-weight-semibold">Example of a post with a list:</p>
-                      <div class="has-text-centered width1010 has-margin-left-30 has-margin-right-30">
-                        <textarea class="textarea is-info is-small" rows="2" readonly="readonly">Example Domain /myfirstlist</textarea>
-                        <p class="is-size-7 has-text-right has-text-link">example.com</p>
-                      </div>
+                      <p className="has-text-centered">
+                        <a href="https://pegao.co/https://pegao.co/getting-started" className="button is-link is-rounded">Paste my first link</a>
+                      </p>
+                      <p className="has-text-centered">
+                        <a href="/getting-started" className="button is-rounded">Getting started</a>
+                      </p>
                       <p></p>
                       <p></p>
                     </div>;

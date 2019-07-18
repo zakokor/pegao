@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Getting started: How do I paste a link? Write in the address bar of the browser "pegao.co/" before the link you want - Pegao{% endblock %}
+
+{% block content %}
+<section class="sectio1n is-medi">
+	<div class="content is-me1dium has-padding-50 has-background-white">
+		<h1 class="has-text-centered has-text-link">Welcome to Pegao!</h1>
+		<div class='is-flex is-horizontal-center has-margin-top-35'>
+			<figure class="image is-48x48">
+				<img src="static/img/1f603.svg" />
+			</figure>
+		</div>
+		<h2>First step: Start saving and sharing pages!</h2>
+		<p>From now on you can start to paste the links that inspire you and share them with your followers.</p>
+		<p>Pasting a link is very simple, write in the address bar of the browser <strong>"pegao.co<span className="is-size-6">/</span>"</strong> before the link you want to share and press "Paste".</p>
+		<div class='is-flex is-horizontal-center has-margin-top-30'>
+			<figure>
+				<img src="static/img/howtopost.gif" width="500px" />
+			</figure>
+		</div>
+		<h3>How to use lists</h3>
+		<p>A list —written with a <strong>/</strong> symbol— is a curated group of links. You can create your own lists with your links to easily categorize them.</p>
+		<ul>
+			<li>Only one list can be included by post, and we recommend type a list at the end in a post.</li>
+			<li>You cannot add spaces or punctuation in a list, or it will not work properly.</li>
+			<li>You can see your own lists, or someone else's, by visiting the profile page. Note that lists are public and anyone can view them.</li>
+		</ul>
+		<p className="has-text-weight-semibold">Example of a post with a list:</p>
+		<div class="has-text-centered has-margin-left-30 has-margin-right-30">
+			<textarea class="textarea is-medium" rows="2" readonly="readonly">Example Domain /myfirstlist</textarea>
+			<p class="has-text-right has-text-link">example.com</p>
+		</div>
+		<p></p>
+		<p></p>
+	</div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p class="is-size-7">
+      Pegao is a project created by <a href="https://twitter.com/zakokor" target="_blank">Gonzalo Aragón</a>.
+      Email me for help <a href="mailto:gonza@pegao.com">gonza@pegao.co</a>
+    </p>
+    <p>
+      <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
+        <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="148" height="36">
+      </a>
+    </p>
+  </div>
+</footer>
+{% endblock %}
