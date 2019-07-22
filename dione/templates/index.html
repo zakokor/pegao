@@ -1,50 +1,173 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero is-medium">
+<section class="hero is-medium has-background-blue">
   <div class="hero-body">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-half">
-          <div class="columns is-multiline">
-            <div class="column is-full has-text-centered">
-              <h1 class="title is-family-intro"><strong>Pegao</strong> is a space to save and share curated pages with others</h1>
-            </div>
-            <div class="column is-half1 has-text-centered has-margin-top-20">
-              <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-fire"></i></span>
-              <span class="tag is-warning has-padding-5 has-margin-right-5"><i class="em em-star"></i></span>
-              <span class="tag is-success has-padding-5 has-margin-right-5"><i class="em em-clap"></i></span>
-              <span class="tag is-danger has-padding-5 has-margin-right-5"><i class="em em-bulb"></i></span>
-              <span class="tag is-purple has-padding-5 has-margin-right-5"><i class="em em-joy"></i></span>
-              <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-rage"></i></span>
-              <span class="tag is-sky has-padding-5 has-margin-right-5"><i class="em em-heart"></i></span>
-              <span class="tag is-primary has-padding-5 has-margin-right-5"><i class="em em-round_pushpin"></i></span>
-              <span class="tag is-info has-padding-5 has-margin-right-5"><i class="em em-bookmark"></i></span>
-            </div>
+    <div class="columns has-padding-5">
+      <div class="column is-half">
+        <div class="columns is-multiline">
+          <div class="column is-full has-text-centered">
+            <h1 class="title is-family-intro has-text-white"><strong>Pegao</strong> is a space to save and share curated pages with others</h1>
+          </div>
+          <div class="column is-half1 has-text-centered has-margin-top-20 has-margin-bottom-40">
+            <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-fire"></i></span>
+            <span class="tag is-warning has-padding-5 has-margin-right-5"><i class="em em-star"></i></span>
+            <span class="tag is-success has-padding-5 has-margin-right-5"><i class="em em-clap"></i></span>
+            <span class="tag is-danger has-padding-5 has-margin-right-5"><i class="em em-bulb"></i></span>
+            <span class="tag is-purple has-padding-5 has-margin-right-5"><i class="em em-joy"></i></span>
+            <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-rage"></i></span>
+            <span class="tag is-sky has-padding-5 has-margin-right-5"><i class="em em-heart"></i></span>
+            <span class="tag is-primary has-padding-5 has-margin-right-5"><i class="em em-round_pushpin"></i></span>
+            <span class="tag is-info has-padding-5 has-margin-right-5"><i class="em em-bookmark"></i></span>
           </div>
         </div>
-        <div class="column is-half">
-          <div class="columns is-multiline is-centered has-margin-top-20">
-            <div class="column is-full has-text-centered">
-              <h2 class="subtitle">Log in to start</h2>
-            </div>
-            <div class="column is-full has-text-centered">
-              <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
-                <span class="icon">
-                  <i class="uil uil-google"></i>
-                </span>
-                <span>Log in with Google</span>
-              </a>
-            </div>
-            <div class="column is-three-quarters has-text-centered has-margin-top-20">
-              By using Pegao, you agree to our <a href="privacy" target="_blank">Privacy policy</a> and <a href="terms" target="_blank">Terms of service</a>.
-            </div>
+      </div>
+      <div class="column is-half">
+        <div class="columns is-multiline is-centered">
+          <div class="column is-full has-text-centered">
+            <h2 class="subtitle has-text-white">Log in to start</h2>
+          </div>
+          <div class="column is-full has-text-centered">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+              <span class="icon">
+                <i class="uil uil-google"></i>
+              </span>
+              <span>Log in with Google</span>
+            </a>
+          </div>
+          <div class="column is-three-quarters has-text-centered has-margin-top-20 has-text-white">
+            By using Pegao, you agree to our <a href="privacy" target="_blank" class="has-text-grey-light">Privacy policy</a> and <a href="terms" target="_blank" class="has-text-grey-light">Terms of service</a>.
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<section class="hero has-background-white">
+  <div class="hero-body">
+    <div class="container">
+      <nav class="mini-cards">
+        <span class="mini-card">
+          <h2 class="mini-card-name">
+            <span class="icon mini-card-figure">
+              <i class="uil uil-square-shape is-size-2 has-text-link"></i>
+            </span>
+            Simple
+          </h2>
+          <p class="mini-card-subtitle">
+            No app required. No ads. No tracking of your activity. Designed for mobile first.
+          </p>
+        </span>
+
+        <span class="mini-card">
+          <h2 class="mini-card-name">
+            <span class="icon mini-card-figure">
+              <i class="uil uil-grin-tongue-wink is-size-2 has-text-orange"></i>
+            </span>
+            Easy
+          </h2>
+          <p class="mini-card-subtitle">
+            Save directly from your <strong>browser</strong>. From any device. Without installing anything.
+          </p>
+        </span>
+
+        <span class="mini-card">
+          <h2 class="mini-card-name">
+            <span class="icon mini-card-figure">
+              <i class="uil uil-megaphone is-size-2 has-text-primary"></i>
+            </span>
+            Social
+            <span class="tag is-success">Soon</span>
+          </h2>
+          <p class="mini-card-subtitle">
+            Follow sources and people. Likes, re-paste and sharing pages.
+          </p>
+        </span>
+
+        <span class="mini-card">
+          <h2 class="mini-card-name">
+            <span class="icon mini-card-figure">
+              <i class="uil uil-heart is-size-2 has-text-danger"></i>
+            </span>
+            Independent
+          </h2>
+          <p class="mini-card-subtitle">
+            Built by the community, for the community.
+          </p>
+        </span>
+
+        <a class="mini-card" href="https://github.com/zakokor/pegao" target="_blank">
+          <h2 class="mini-card-name">
+            <span class="icon mini-card-figure">
+              <i class="uil uil-github is-size-2 has-text-black"></i>
+            </span>
+            Free
+          </h2>
+          <p class="mini-card-subtitle">
+            Open source on <strong>GitHub</strong>.
+          </p>
+        </a>
+      </nav>
+
+      <div class="has-text-centered has-padding-30">
+        <a href="tour" class="button is-link is-rounded is-large">
+          <span class="icon">
+            <i class="uil uil-play"></i>
+          </span>
+          <span>Take a tour</span>
+        </a>
+      </div>
+
+      <div class="box has-margin-top-30 has-background-dark-blue">
+        <div class="content">
+          <h3 class="title is-3 has-text-info">Pricing</h3>
+          <p class="has-text-white">
+            Currently the <span class="tag is-warning">beta</span> version <strong class="has-text-warning">is free</strong> of payment <span class="has-text-warning">but</span> once it reaches a certain number of active users and tests some features, <strong class="has-text-white">Pegao will be fully supported by paid users and supporters</strong> — because I hope the platform never shows ads, nor share your data with third parties.
+          </p>
+
+          <h3 class="title is-5 has-text-white has-margin-top1-30">Would you like to help?</h3>
+
+          <div class="field">
+            <p class="control">
+              <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
+                <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="190" />
+              </a>
+            </p>
+            <p class="control">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://pegao.co" class="button has-background-facebook is-medium" target="_blank">
+                <span class="icon">
+                  <i class="uil uil-facebook"></i>
+                </span>
+                <span>Share</span>
+              </a>
+            </p>
+            <p class="control">
+              <a href="http://twitter.com/share?text=Pegao is a space to save and share curated pages with others&url=https://pegao.co" class="button has-background-twitter is-medium" target="_blank">
+                <span class="icon">
+                  <i class="uil uil-twitter"></i>
+                </span>
+                <span>Share</span>
+              </a>
+            </p>
+          </div>
+
+          <p class="has-text-white has-margin-top-20">Thank you for considering this effort and for all your support using and contributing to Pegao!</p>
+        </div>
+      </div>
+
+      <div class="has-text-right has-padding-t1op-30">
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+          <span class="icon">
+            <i class="uil uil-google"></i>
+          </span>
+          <span>Log in with Google</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="content has-text-centered">
     <p class="is-size-7">

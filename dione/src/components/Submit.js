@@ -271,7 +271,7 @@ class Submit extends PureComponent {
             <form onSubmit={this.handleSubmit} className="has-backg1round-white">
               <div className="columns is-multiline is-mobile is-centered is-gapless">
                 <div className="column is-three-fifths-desktop is-full-touch has-margin-bottom-10">
-                  <h1 className="title is-auto-3 has-text-info">Paste the link as...</h1>
+                  <h1 className="title is-auto-3 has-text-info">Save and share as...</h1>
                 </div>
                 <div className="column is-three-fifths-desktop is-full-touch has-text-centered">
                   <textarea className="textarea is-info is-large"

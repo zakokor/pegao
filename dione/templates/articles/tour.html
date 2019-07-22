@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Pegao Tour{% endblock %}
+
+{% block content %}
+<section class="section is-med1ium has-background-whi1te">
+	<div class="content is-medium">
+	  <div class="columns is-multiline is-vcentered is-centered">
+			<div class="column is-half has-text-centered">
+				<h1 class="title">Start to paste the pages that inspire you and share them with your followers.</h1>
+				<p>Pasting a link is very simple, write in the address bar of the browser <strong>"pegao.co<span className="is-size-6">/</span>"</strong> before the link you want to share and press "Paste".</p>
+			</div>
+			<div class="column is-two-thirds has-margin-top-30 has-background-dark-blue">
+				<figure class="image has-margi1n-30 has-padding-top-35 has-padding-bottom-0 has-margin-bottom-30">
+					<img class="is-squared-rounded" src="static/img/screen-submit.png" >
+				</figure>
+			</div>
+
+			<div class="column is-full has-text-centered has-padding-top-40 has-padding-bottom-50 has-background-light-blue">
+				<h2 class="title has-text-center1ed">Organize your pages with emojis!</h2>
+				<div class="is-flex is-horizontal-center has-margin-35">
+					<figure class="image is-48x48">
+						<img src="static/img/1f603.svg" />
+					</figure>
+				</div>
+				<p>
+					<span class="tag is-danger has-padding-5 has-margin-right-5"><i class="em em-bulb"></i></span> — Capture your ideas.
+				</p>
+				<p>
+					<span class="tag is-warning has-padding-5 has-margin-right-5"><i class="em em-star"></i></span> — Bookmark your favorite pages.
+				</p>
+				<p>
+					<span class="tag is-primary has-padding-5 has-margin-right-5"><i class="em em-round_pushpin"></i></span> — Remember a place.
+				</p>
+				<p>
+					<span class="tag has-padding-5 has-margin-right-5"><i class="em em-shopping_trolley"></i></span> — Something to buy.
+				</p>
+				<p>
+					<span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-gift"></i></span> — For your gift list.
+				</p>
+				<p>
+					<span class="tag is-purple has-padding-5 has-margin-right-5"><i class="em em-bookmark"></i></span> — Save for later.
+				</p>
+				<p>
+					 — And more...
+				</p>
+			</div>
+			<div class="column is-full has-text-centered has-padding-top-40 has-background-white">
+				<h2 class="title has-text-center1ed">Create your own lists</h2>
+				<p>You can create your own lists — written with a <strong>/</strong> symbol — to easily categorize them.</p>
+				<div class="is-flex is-horizontal-center has-margin-35">
+					<figure class="image is-200">
+						<img src="static/img/screen-first-list.png" />
+					</figure>
+				</div>
+			</div>
+			<div class="column is-three-fifths has-text-centered  has-padding-top-20 has-padding-50 has-background-blue">
+				<figure class="image has-padding-top-35 has-padding-bottom-35">
+					<img class="is-squared-rounded" src="static/img/screen-wall.png" >
+				</figure>
+			</div>
+			<div class="column is-1full has-text-centered has-padding-top-20 has-padding-50">
+				<p>The <strong>Wall</strong> — Find out what people are saving and sharing right now.</p>
+				<p><strong>Posts, Likes and Lists</strong> — This is your bookmarks.</p>
+			</div>
+			<div class="column is-full has-text-centered has-padding-top-40 has-padding-bottom-50 has-background-white">
+				<h4 class="subtitle has-text-grey">Log in to start, it's easy</h4>
+				<div class="has-text1-right has-padding-t1op-30">
+	        <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+	          <span class="icon">
+	            <i class="uil uil-google"></i>
+	          </span>
+	          <span>Log in with Google</span>
+	        </a>
+	      </div>
+			</div>
+	  </div>
+	</div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p class="is-size-7">
+      Pegao is a project created by <a href="https://twitter.com/zakokor" target="_blank">Gonzalo Aragón</a>.
+      Email me for help <a href="mailto:gonza@pegao.com">gonza@pegao.co</a>
+    </p>
+    <p>
+      <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
+        <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="148" height="36">
+      </a>
+    </p>
+  </div>
+</footer>
+{% endblock %}

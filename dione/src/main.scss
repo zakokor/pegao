@@ -4,7 +4,7 @@
 
 $section-padding: 3.8rem 0rem 0rem 0rem !default;
 $section-padding-medium: 9rem 1.5rem 0rem !default;
-$footer-padding: 1rem 1.5rem 6rem;
+$footer-padding: 1.5rem 1.5rem 6rem;
 
 $body-background-color: hsl(0, 0%, 96%);
 
@@ -29,6 +29,55 @@ $tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
 @import "~bulma/bulma";
 
 //custom zakokor 01-03-19
+.mini-cards {
+  counter-reset: bd-links;
+}
+@media screen and (max-width: $desktop - 1px) {
+  .mini-cards {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+}
+@media screen and (min-width: $desktop) {
+  .mini-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .mini-card {
+    width: 50%;
+  }
+}
+
+.mini-card:hover {
+  background-color: #fafafa;
+}
+.mini-card {
+  border-radius: 6px;
+  color: #7a7a7a;
+  display: block;
+  font-size: 1.25rem;
+  padding: 1rem 3rem 1.5rem 5rem;
+  position: relative;
+  transition-duration: 86ms;
+  transition-property: background-color,color;
+}
+.mini-card-figure {
+  position: absolute;
+  right: calc(100% + .75em);
+  text-align: center;
+  top: 0;
+  min-width: 1.5em;
+}
+.mini-card-name {
+  color: #363636;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: .25em;
+  position: relative;
+}
+
+
 .is-borderless { border:0 }
 .is-border-bottom { border:0;border-bottom:1px solid $grey }
 
@@ -92,6 +141,11 @@ svg {
     color: #fff;
 }
 
+.image.is-200 {
+  //height: 48px;
+  width: 500px;
+}
+
 //columns
 .width80 {
   width:80px;
@@ -121,6 +175,25 @@ svg {
 }
 .has-background-orange {
   background-color: #f15a24
+}
+.has-background-blue {
+  background-color: #3b49ff;
+}
+.has-background-dark-blue {
+  background-color: #232b97;
+}
+.has-background-light-blue {
+  background-color: #e6efff;
+}
+.has-background-facebook {
+  background-color: #4267b2;
+  border-color: transparent;
+  color: #fff;
+}
+.has-background-twitter {
+  background-color: #55acee;
+  border-color: transparent;
+  color: #fff;
 }
 
 //on desktop
@@ -153,7 +226,7 @@ svg {
     font-size: 1.2rem;
   }
 }
-//.image img.is-square3 { border-radius:  45% 40% 40% 40% ; }
+.image img.is-squared-rounded { -moz-border-radius: 0.5rem; border-radius: 0.5rem; }
 
 
 .has-border-white { border:3px solid $white }
@@ -343,6 +416,10 @@ table tbody > p {
 
 .em-cry{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f622.png")}
 .em-cry.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f622.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f622.svg"),none}
+
+.em-clap{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f44f.png")}
+.em-clap.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f44f.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f44f.svg"),none}
+
 
 //tooltip
 .tippy-tooltip.grey-theme {

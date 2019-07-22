@@ -30,5 +30,9 @@ def terms(request):
 def privacy(request):
       return render(request, 'privacy.html')
 
+#articles
+def tour(request):
+      return render(request, 'articles/tour.html')
+
 def getting_started(request):
       return render(request, 'articles/how-do-i-paste-a-link.html')

@@ -3,7 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {% load static %}
+  <meta name="description" content="Pegao is a space to save and share pages" />
+
+  <meta property="og:url" content="https://www.pegao.co" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pegao" />
+  <meta property="og:description" content="A space to save and share pages" />
+  <meta property="og:image" content="{% static "img/apple-touch-icon-144x144.png" %}" />
+
+  <meta name="twitter:title" content="Pegao" />
+  <meta name="twitter:description" content="A space to save and share pages" />
+  <meta name="twitter:image" content="{% static "img/apple-touch-icon-144x144.png" %}" />
+
   <link rel="icon" type="image/png" href="{% static "img/favicon-196x196.png" %}" sizes="196x196" />
   <link rel="icon" type="image/png" href="{% static "img/favicon-96x96.png" %}" sizes="96x96"/>
   <link rel="icon" type="image/png" href="{% static "img/favicon-32x32.png" %}" sizes="32x32" />
@@ -14,7 +27,8 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "img/apple-touch-icon-72x72.png" %}" />
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "img/apple-touch-icon-144x144.png" %}" />
   <link rel="stylesheet" href="{% static "dist/main.css" %}">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v0.0.4/css/unicons.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v1.0.0/css/unicons.css">
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142105356-1"></script>
   <script>
@@ -30,7 +44,7 @@
 <nav class="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <img src="{% static "img/big.pegao.svg" %}" width="140px">
+      <img src="{% static "img/big.pegao.svg" %}" width="140px"> <span class="tag is-warning">beta</span>
     </a>
 
     <a class="navbar-item is-hidden-desktop" href="https://github.com/zakokor/pegao" target="_blank">
@@ -45,15 +59,12 @@
       </span>
     </a>
 
-    <div class="navbar-item is-hidden-desktop">
-      <div class="field is-grouped is-grouped-multiline">
-        <p class="control">
-          <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
-            <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="148" height="36" />
-          </a>
-        </p>
-      </div>
-    </div>
+    <a class="navbar-item is-hidden-desktop" href="https://www.patreon.com/zakokor" target="_blank">
+      <span class="icon has-text-patreon">
+        <svg class="svg-inline" aria-hidden="true" data-prefix="fab" data-icon="patreon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M512 194.8c0 101.3-82.4 183.8-183.8 183.8-101.7 0-184.4-82.4-184.4-183.8 0-101.6 82.7-184.3 184.4-184.3C429.6 10.5 512 93.2 512 194.8zM0 501.5h90v-491H0v491z"></path></svg>
+      </span>
+    </a>
+
   </div>
 
   <div id="navMenuIndex" class="navbar-menu">

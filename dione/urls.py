@@ -2,6 +2,10 @@ from django.urls import path #, re_path
 from . import views
 
 urlpatterns = [
+  #articles
+  path('tour', views.tour ),
+  path('getting-started', views.getting_started ),
+  
   path('http<path:url>', views.submit ),
   #re_path(r'^(?P<url>.*)/$', views.submit ),
   #re_path(r'^(http|http(s)\?://[\w-]+\.)+(?P<url>)?', views.submit ),
@@ -19,7 +23,5 @@ urlpatterns = [
 
   path('terms', views.terms ),
   path('privacy', views.privacy ),
-
-  path('getting-started', views.getting_started ),
 
 ]
