@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero is-medium has-background-blue">
+<section class="hero is-medium">
   <div class="hero-body">
     <div class="columns has-padding-5">
       <div class="column is-half">
         <div class="columns is-multiline">
           <div class="column is-full has-text-centered">
-            <h1 class="title is-family-intro has-text-white"><strong>Pegao</strong> is a space to save and share curated pages with others</h1>
+            <h1 class="title is-family-intro"><strong>Pegao</strong> is a space to save and share curated pages with others</h1>
           </div>
           <div class="column is-half1 has-text-centered has-margin-top-20 has-margin-bottom-40">
             <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-fire"></i></span>
@@ -25,7 +25,7 @@
       <div class="column is-half">
         <div class="columns is-multiline is-centered">
           <div class="column is-full has-text-centered">
-            <h2 class="subtitle has-text-white">Log in to start</h2>
+            <h2 class="subtitle">Log in to start</h2>
           </div>
           <div class="column is-full has-text-centered">
             <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
@@ -35,7 +35,7 @@
               <span>Log in with Google</span>
             </a>
           </div>
-          <div class="column is-three-quarters has-text-centered has-margin-top-20 has-text-white">
+          <div class="column is-three-quarters has-text-centered has-margin-top-20">
             By using Pegao, you agree to our <a href="privacy" target="_blank" class="has-text-grey-light">Privacy policy</a> and <a href="terms" target="_blank" class="has-text-grey-light">Terms of service</a>.
           </div>
         </div>
