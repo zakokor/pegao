@@ -1,42 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero is-medium">
+<section class="hero">
   <div class="hero-body">
     <div class="columns has-padding-5">
       <div class="column is-half">
-        <div class="columns is-multiline">
-          <div class="column is-full has-text-centered">
-            <h1 class="title is-family-intro"><strong>Pegao</strong> is a space to save and share curated pages with others</h1>
+        <div class="columns is-multiline is-centered">
+          <div class="column is-four-fifths-desktop is-full-touch has-text-centered">
+            <p class="title is-family-intro has-text-black has-margin-bottom-15"><strong class="has-text-link">Save</strong> your <strong class="has-text-link">links,</strong> it's free and open source.</p>
+            <p class="is-size-5 has-text-link">— Pegao helps you organize them into lists or simply with emojis.</p>
           </div>
-          <div class="column is-half1 has-text-centered has-margin-top-20 has-margin-bottom-40">
-            <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-fire"></i></span>
-            <span class="tag is-warning has-padding-5 has-margin-right-5"><i class="em em-star"></i></span>
-            <span class="tag is-success has-padding-5 has-margin-right-5"><i class="em em-clap"></i></span>
-            <span class="tag is-danger has-padding-5 has-margin-right-5"><i class="em em-bulb"></i></span>
-            <span class="tag is-purple has-padding-5 has-margin-right-5"><i class="em em-joy"></i></span>
-            <span class="tag is-light-yellow has-padding-5 has-margin-right-5"><i class="em em-rage"></i></span>
-            <span class="tag is-sky has-padding-5 has-margin-right-5"><i class="em em-heart"></i></span>
-            <span class="tag is-primary has-padding-5 has-margin-right-5"><i class="em em-round_pushpin"></i></span>
-            <span class="tag is-info has-padding-5 has-margin-right-5"><i class="em em-bookmark"></i></span>
+          <div class="column is-full has-text-centered has-padding-top-45">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+              <span class="icon">
+                <i class="uil uil-google"></i>
+              </span>
+              <span>Sign Up Free</span>
+            </a>
+          </div>
+          <div class="column is-three-quarters has-text-centered has-text-grey has-margin-bottom-30">
+            By using Pegao, you agree to our <a href="privacy" target="_blank" class="has-text-grey-light">Privacy policy</a> and <a href="terms" target="_blank" class="has-text-grey-light">Terms of service</a>.
           </div>
         </div>
       </div>
       <div class="column is-half">
         <div class="columns is-multiline is-centered">
           <div class="column is-full has-text-centered">
-            <h2 class="subtitle">Log in to start</h2>
-          </div>
-          <div class="column is-full has-text-centered">
-            <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
-              <span class="icon">
-                <i class="uil uil-google"></i>
-              </span>
-              <span>Log in with Google</span>
-            </a>
-          </div>
-          <div class="column is-three-quarters has-text-centered has-margin-top-20">
-            By using Pegao, you agree to our <a href="privacy" target="_blank" class="has-text-grey-light">Privacy policy</a> and <a href="terms" target="_blank" class="has-text-grey-light">Terms of service</a>.
+            <figure class="image">
+    					<img class="is-squared-rounded" src="static/img/screen-wall.png" >
+    				</figure>
           </div>
         </div>
       </div>
@@ -125,7 +117,7 @@
             Currently the <span class="tag is-warning">beta</span> version <strong class="has-text-warning">is free</strong> of payment <span class="has-text-warning">but</span> once it reaches a certain number of active users and tests some features, <strong class="has-text-white">Pegao will be fully supported by paid users and supporters</strong> — because I hope the platform never shows ads, nor share your data with third parties.
           </p>
 
-          <h3 class="title is-5 has-text-white has-margin-top1-30">Would you like to help?</h3>
+          <h3 class="title is-5 has-text-white">Would you like to help?</h3>
 
           <div class="field">
             <p class="control">
@@ -155,7 +147,7 @@
         </div>
       </div>
 
-      <div class="has-text-right has-padding-t1op-30">
+      <div class="has-text-right">
         <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
           <span class="icon">
             <i class="uil uil-google"></i>

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis:400,600&display=swap');
 
 $section-padding: 3.8rem 0rem 0rem 0rem !default;
 $section-padding-medium: 9rem 1.5rem 0rem !default;
@@ -89,7 +89,7 @@ $tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
 
 .is-family-intro {
   font-family: 'Dosis', serif;
-  font-size: 2.25rem;
+  font-size: 3.25rem;
   font-weight: 400;
 }
 .is-family-intro strong {
