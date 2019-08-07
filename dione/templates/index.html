@@ -7,8 +7,8 @@
       <div class="column is-half">
         <div class="columns is-multiline is-centered">
           <div class="column is-four-fifths-desktop is-full-touch has-text-centered">
-            <p class="title is-family-intro has-text-black has-margin-bottom-15"><strong class="has-text-link">Save</strong> your <strong class="has-text-link">links,</strong> it's free and open source.</p>
-            <p class="is-size-5 has-text-link">— Pegao helps you organize them into lists or simply with emojis.</p>
+            <p class="title is-family-intro has-text-black has-margin-bottom-15"><strong class="has-text-link">Save</strong> your <strong class="has-text-link">links,</strong> it's free and social.</p>
+            <p class="is-size-5 has-text-link">— Pegao helps you organize your links into lists or simply with emojis.</p>
           </div>
           <div class="column is-full has-text-centered has-padding-top-45">
             <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
@@ -88,15 +88,16 @@
           </p>
         </span>
 
-        <a class="mini-card" href="https://github.com/zakokor/pegao" target="_blank">
+        <a class="mini-card" href="#" target="_blank">
           <h2 class="mini-card-name">
             <span class="icon mini-card-figure">
               <i class="uil uil-github is-size-2 has-text-black"></i>
             </span>
-            Free
+            Open
+            <span class="tag is-success">Soon</span>
           </h2>
           <p class="mini-card-subtitle">
-            Open source on <strong>GitHub</strong>.
+            Pegao has an open <strong>API</strong>. At the moment, we are focusing on the client's <strong>open source</strong> for browsers.
           </p>
         </a>
       </nav>
@@ -112,18 +113,26 @@
 
       <div class="box has-margin-top-30 has-background-dark-blue">
         <div class="content">
-          <h3 class="title is-3 has-text-info">Pricing</h3>
-          <p class="has-text-white">
-            Currently the <span class="tag is-warning">beta</span> version <strong class="has-text-warning">is free</strong> of payment <span class="has-text-warning">but</span> once it reaches a certain number of active users and tests some features, <strong class="has-text-white">Pegao will be fully supported by paid users and supporters</strong> — because I hope the platform never shows ads, nor share your data with third parties.
+          <p class="title is-3 has-text-info">Pegao is <strong class="has-text-white">free</strong> for everyone because I trust it will be supported by <strong class="has-text-white">donations</strong> — and I hope the platform never shows ads, nor shares your data with third parties.
           </p>
-
-          <h3 class="title is-5 has-text-white">Would you like to help?</h3>
+        </div>
+      </div>
+      <div class="box has-margin-top-30 has-background-grey-lighter">
+        <div class="content">
+          <h3 class="title is-3">🖐️ Would you like to help?</h3>
 
           <div class="field">
+            <p class="has-text-dark">
+              Pegao is currently running on a server that bills me <span class="has-text-danger">$5</span> per month, but in the future I will need more than that. If you enjoy my work on Pegao, please consider supporting what I do. Thank you.
+            </p>
             <p class="control">
               <a class="bd-patreon-button" href="https://www.patreon.com/zakokor" target="_blank">
                 <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="190" />
               </a>
+
+            </p>
+            <p class="control">
+<a class="bd-patreon-kofi" href='https://ko-fi.com/zakokor' target='_blank'><img width="180" src='https://az743702.vo.msecnd.net/cdn/kofi5.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
             </p>
             <p class="control">
               <a href="https://www.facebook.com/sharer/sharer.php?u=https://pegao.co" class="button has-background-facebook is-medium" target="_blank">
@@ -142,8 +151,6 @@
               </a>
             </p>
           </div>
-
-          <p class="has-text-white has-margin-top-20">Thank you for considering this effort and for all your support using and contributing to Pegao!</p>
         </div>
       </div>
 
