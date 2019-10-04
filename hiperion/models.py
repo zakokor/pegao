@@ -72,7 +72,7 @@ class Post(models.Model):
     #channel = models.ForeignKey('Channel',on_delete=models.CASCADE, related_name='channels')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='authors')
     #community = models.ForeignKey('Community', on_delete=models.CASCADE, related_name='communities')
-    community_slug = models.CharField(null=True,max_length=20)
+    #community_slug = models.CharField(null=True,max_length=20)
 
     created_at = models.DateTimeField(auto_now_add=True,db_index=True)
 
@@ -116,6 +116,7 @@ class Activity(models.Model):
         unique_together = ('post', 'user', 'status')
 
 #para suscribirse a una comunidad
+"""
 class Member(models.Model):
     STATUSES = (
         ('follow', 'follow'),
@@ -145,3 +146,4 @@ class Community(models.Model):
         value = self.name
         self.slug = slugify(value, allow_unicode=True)
         super().save(*args, **kwargs)
+"""
