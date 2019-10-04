@@ -163,7 +163,7 @@ class Menu extends PureComponent {
                   </span>
                 </a>
 
-                <a className="navbar-item is-hidden-desktop has-margin-left-auto has-margin-right-10" href="{% url 'social:begin' 'google-oauth2' %}">
+                <a className="navbar-item is-hidden-desktop has-margin-left-auto has-margin-right-10" href="login/google-oauth2/">
                   <span className="icon">
                     <i className="uil uil-google"></i>
                   </span>
@@ -194,7 +194,7 @@ class Menu extends PureComponent {
                     </span>
                   </a>
 
-                  <a className="navbar-item is-hidden-touch" href="{% url 'social:begin' 'google-oauth2' %}">
+                  <a className="navbar-item is-hidden-touch" href="login/google-oauth2/">
                     <span className="icon">
                       <i className="uil uil-google"></i>
                     </span>
