@@ -137,7 +137,7 @@ $red: hsl(345, 100%, 61%);
     }
   }
 
-.mini-cards {
+/*.mini-cards {
   counter-reset: bd-links;
 }
 @media screen and (max-width: $desktop - 1px) {
@@ -183,7 +183,7 @@ $red: hsl(345, 100%, 61%);
   line-height: 1.25;
   margin-bottom: .25em;
   position: relative;
-}
+}*/
 
 .is-borderless { border:0 }
 .is-border-bottom { border:0; border-bottom:1px solid $grey-lighter }
@@ -232,12 +232,16 @@ svg {
   vertical-align: -.125em;
 }
 
-
 .is-text-overflow {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.is-text-wrap {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .divider-h {

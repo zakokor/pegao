@@ -38,12 +38,12 @@ class CardLists extends PureComponent {
     
     return (
       <React.Fragment>
-        <div>
-             <span className="has-text-weight-semibold">Lists</span>
-            {data && data.map(hit =>
-              <span className="is-siz1e-7 has-margin-left-10" key={key(hit)}><Link to={`/@`+hit.username+`/list/`+hit.list}>{`/`+hit.list}</Link></span>
-              )
-            }
+        <div className="is-text-wrap">
+          <span className="has-text-weight-semibold">Lists</span>
+          {data && data.map(hit =>
+            <span className="is-siz1e-7 has-margin-left-10" key={key(hit)}><Link to={`/@`+hit.username+`/list/`+hit.list}>{`/`+hit.list}</Link></span>
+            )
+          }
         </div>
       </React.Fragment>
     );

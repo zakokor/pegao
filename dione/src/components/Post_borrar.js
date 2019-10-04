@@ -33,7 +33,7 @@ class Post extends PureComponent {
       text = data.list && before?
               <React.Fragment>
                 {before}
-                <Link to={`/@`+data.username+`/`+data.list}>{`/`+data.list}</Link>{after}
+                <Link to={`/@`+data.username+`/`+data.list}>{`/list/`+data.list}</Link>{after}
               </React.Fragment>
              :
               data.text
