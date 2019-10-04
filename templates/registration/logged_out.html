@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p>Logged out!</p>  
-  <a href="{% url 'login'%}">Click here to login again.</a>
+  <section class="section has-min-height-480 has-margin-left-50 has-margin-right-50 ">
+  <div class="container is-fullhd has-text-centered">
+    <h1 class="title has-margin-top-50">Click here to login again</h1>
+    <p>
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-google is-rounded is-medium">
+        <span class="icon">
+          <i class="uil uil-google"></i>
+        </span>
+        <span>Log in with Google</span>
+      </a>
+    </p>
+    <p class="has-text-dark has-margin-top-10 has-padding-bottom-50">
+      By using Pegao, you agree to our <a href="privacy" target="_blank" class="has-text-dark">Privacy policy</a> and <a href="terms" target="_blank" class="has-text-dark">Terms of service</a>.
+    </p>
+  </div>
+</section>
 {% endblock %}

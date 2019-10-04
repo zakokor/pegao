@@ -7,6 +7,17 @@ axios.defaults.xsrfCookieName = "csrftoken";
 export default class UserService {
 
 	constructor(){}
+  
+  getCurrentUser() {
+		const url = `${API_URL}/api/users/me`;
+		return axios.get(url).then(response => response);
+	}
+  
+  
+  getTopUser() {
+		const url = `${API_URL}/api/users/top`;
+		return axios.get(url).then(response => response);
+	}
 
   getUser(username) {
 		const url = `${API_URL}/api/users/${username}`;
@@ -14,9 +25,14 @@ export default class UserService {
 	}
 
   getUserList(username) {
-		const url = `${API_URL}/api/users/${username}/list`;
+		const url = `${API_URL}/api/users/${username}/lists`;
 		return axios.get(url).then(response => response);
 	}
+
+	/*getUserCommunities(username) {
+		const url = `${API_URL}/api/users/${username}/communities`;
+		return axios.get(url).then(response => response);
+	}*/
 
   getFriendship(username) {
 		const url = `${API_URL}/api/friendships/${username}`;

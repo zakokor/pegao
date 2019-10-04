@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { Link } from 'react-router-dom';
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import Tippy from '@tippy.js/react';
+import format from 'date-fns/format';
 import Emoji from './Emoji';
 import View from './View';
 import Vote from './Vote';
@@ -10,8 +9,14 @@ import RePost from './RePost';
 class Post extends PureComponent {
   constructor(props) {
     super(props);
+    /*this.state = {
+      hover: false
+    }*/
   }
 
+  /*toggleHover = () => {
+    this.setState({hover: !this.state.hover})
+  }*/
 
   render() {
     const { data, showphoto } = this.props;
@@ -27,7 +32,8 @@ class Post extends PureComponent {
 
       text = data.list && before?
               <React.Fragment>
-                {before} <Link to={`/@`+data.username+`/`+data.list}>{`/`+data.list}</Link>{after}
+                {before}
+                <Link to={`/@`+data.username+`/`+data.list}>{`/`+data.list}</Link>{after}
               </React.Fragment>
              :
               data.text
@@ -35,13 +41,17 @@ class Post extends PureComponent {
     }
     //console.timeEnd("timer");
 
+    let style = "columns posts is-gapless is-mobile has-margin-bottom-0 is-multiline has-padding-10";
+
+    //<View id={data.id} views={data.views} viewed={data.viewed} link={data.link} />
+    
     return (
         <React.Fragment>
-          <div className="columns is-gapless is-mobile has-margin-bottom-0 is-multiline">
+          <div className={style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <div className="column is-narrow">
               {showphoto &&
-              <div className="has-margin-top-5 has-padding-right-10">
-                <Link to={`@`+data.username} className="has-text-grey is-size-7 is-pull1ed-left">
+              <div className="post-avatar has-margin-5 has-padding-right-10">
+                <Link to={`@`+data.username} className="has-text-grey is-size-7">
                   {data.photo?
                     <figure className="image avatar">
                       <img className="is-rounded" src={data.photo} />
@@ -52,52 +62,35 @@ class Post extends PureComponent {
                     </p>
                   }
                 </Link>
+                <div className="emoji-overlay">
+                  <Emoji value={data.emoji} />
+                </div>
               </div>
               }
             </div>
             <div className="column">
               <div className="columns is-multiline is-mobile is-gapless has-margin-bottom-0">
                 <div className="column is-full">
-                  <span className="has-text-dark is-size-6-5 has-text-weight-semibold">{data.username}</span>
+                  <span className="has-text-dark is-size-6-5 has-text-weight-semibold">{data.fullname}</span>
+                  <span className="is-size-6-5 has-text-grey has-margin-left-5">@{data.username}</span>
                 </div>
-                <div className="column is-narrow">
-                  <Emoji value={data.emoji} />
-                </div>
-                <div className="column has-margin-left-5">
+                <div className="column">
                   <div className="columns is-multiline is-mobile is-gapless has-margin-bottom-0">
-                    <div className="column is-10-touch is-11-desktop has-margin-bottom-15">
-                      <span className="is-size-6-5 has-line-height-15 has-text-dark has-background-war1ning">{text}</span>
-                      <span className="has-margin-left-10 is-size-7 has-text-grey-light">via</span> <span className="is-size-7">{data.link.split('/')[2]}</span>
-                      <span className="has-margin-left-10 is-size-7 has-text-grey-light">{distanceInWordsToNow(data.created_at)}</span>
+                    <div className="column is-10-touch is-8-desktop has-margin-bottom-15">
+                      <p className="has-margin-top-5 is-size-6 has-line-height-15 has-text-dark">{text}</p>
                     </div>
-                    <div className="column is-2-touch is-1-desktop has-text-right">
-                      <View id={data.id} views={data.views} viewed={data.viewed} link={data.link} />
-                    </div>
-                    <div className="column is-one-quarter-touch is-narrow-desktop">
-                      <div className="width80">
+                    <div className="column is-1-touch is-4-desktop">
+                      <div className="buttons has-padding-left-5">
+                        <View id={data.id} views={data.views} viewed={data.viewed} link={data.link} />
                         <Vote id={data.id} votes={data.votes} voted={data.voted} />
-                      </div>
-                    </div>
-                    <div className="column is-one-quarter-touch is-narrow-desktop">
-                      <div className="width80">
-                        <RePost id={data.id} repost={data.repost} reposted={data.reposted} />
-                      </div>
-                    </div>
-                    <div className="column has-text-right">
-                      <div className="icon">
-                        <Tippy arrow={true} theme={'orange'} content="Proximamente!">
-                          <i className="uil uil-ellipsis-h"></i>
-                        </Tippy>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="column is-full has-margin-top-10 has-margin-bottom-10">
-              <div className="divider-h"></div>
-            </div>
           </div>
+          <div className="post-separator"><hr/><span className="has-margin-left-25 has-margin-right-25 is-size-7 has-text-grey">{format(data.created_at, 'DD MMMM, YYYY h:mma')}</span><hr/></div>
         </React.Fragment>
     );
   }

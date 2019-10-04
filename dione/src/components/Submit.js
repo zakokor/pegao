@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import throttle from 'lodash.throttle';
-import queryString from 'query-string';
-import Tippy from '@tippy.js/react';
-import ContentEditable from "react-contenteditable";
+//import queryString from 'query-string';
+//import ContentEditable from "react-contenteditable";
 import PostService from './PostService';
 
 const postService = new PostService();
@@ -24,13 +23,13 @@ class Submit extends PureComponent {
             label: 'Share',
           },
           {
-            emoji:'smiley',
-            label: 'Like',
+            emoji:'heart',
+            label: 'Love',
           },
-          {
-            emoji:'rage',
-            label: 'Angry',
-          },
+          /*{
+            emoji:'thumbsdown',
+            label: 'Dislike',
+          },*/
           {
             emoji:'bulb',
             label: 'Idea',
@@ -81,7 +80,7 @@ class Submit extends PureComponent {
     }
     console.log('es la misma columna');
 
-    const emojilists = [
+    //const emojilists = [
         /*{
           id: 0,
           list: [
@@ -103,7 +102,7 @@ class Submit extends PureComponent {
             },
           ]
         },*/
-        {
+        /*{
           id: 1,
           list: [
             {
@@ -115,8 +114,8 @@ class Submit extends PureComponent {
               label: 'Love',
             },
           ]
-        },
-        {
+        },*/
+        /*{
           id: 2,
           list: [
             {
@@ -130,16 +129,16 @@ class Submit extends PureComponent {
             {
               emoji:'cry',
               label: 'Sad',
-            },
-          ]
-        },
-    ];
+            },*/
+          //]
+        //},
+    //];
 
     //se ubica en la lista correcta
-    let emojilist = emojilists.find(item => {
+    /*let emojilist = emojilists.find(item => {
       return item.id === column;
     });
-    console.log('emojilist',emojilist)
+    console.log('emojilist',emojilist)*/
 
     //busca el siguiente emoji de la columna
     if(emojilist){
@@ -165,6 +164,8 @@ class Submit extends PureComponent {
   componentDidMount(){
     const { match: { params } } = this.props;
 		const {formFields} = this.state;
+    
+    console.log("submit",this.props.location);
 
     //suma a la url el valor en location.search, en caso que el link tengo query string ej. /?q=something
     postService.getSubmit(this.props.location.pathname.substr(1, this.props.location.pathname.length)+this.props.location.search).then(res => {
@@ -210,7 +211,7 @@ class Submit extends PureComponent {
   SendPost(){
     const {formFields} = this.state;
 
-    postService.createPost(
+    postService.updatePost(
       formFields
     ).then((result)=>{
       console.log("Post created!");
@@ -254,13 +255,11 @@ class Submit extends PureComponent {
     const {formFields,disabled,message,sent,emojis} = this.state;
 
     const emojilist = emojis.map((emojis,index) =>
-        <Tippy key={index} hideOnClick={false} arrow={true} theme={'grey'} content={emojis.label}>
-          <span key={index} className="button is-white is-rounded is-paddingless is-shadowless is-inline-table has-margin-5">
-            <a onClick={() => this.handleClickEmoji(index)}>
-              <i className={formFields['emoji']==emojis.emoji?'em em-svg em-'+emojis.emoji+' is-extra-large':'em em-svg em-'+emojis.emoji+' is-large'}></i>
-            </a>
-          </span>
-        </Tippy>
+				<span key={index} className="button is-white is-rounded is-paddingless is-shadowless is-inline-table has-margin-5 tooltip tooltip-top" aria-label={emojis.label}>
+					<a onClick={() => this.handleClickEmoji(index)}>
+						<i className={formFields['emoji']==emojis.emoji?'em em-svg em-'+emojis.emoji+' is-extra-large':'em em-svg em-'+emojis.emoji+' is-large'}></i>
+					</a>
+				</span>
     );
 
     return (
@@ -271,7 +270,7 @@ class Submit extends PureComponent {
             <form onSubmit={this.handleSubmit} className="has-backg1round-white">
               <div className="columns is-multiline is-mobile is-centered is-gapless">
                 <div className="column is-three-fifths-desktop is-full-touch has-margin-bottom-10">
-                  <h1 className="title is-auto-3 has-text-info">Save and share as...</h1>
+                  <h1 className="title is-auto-3 has-text-info">Save as...</h1>
                 </div>
                 <div className="column is-three-fifths-desktop is-full-touch has-text-centered">
                   <textarea className="textarea is-info is-large"

@@ -7,6 +7,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from urllib.request import urlopen, Request
 from urllib.parse import urlsplit, quote, urlunsplit
 from bs4 import BeautifulSoup
@@ -17,6 +18,26 @@ from hiperion.models import *
 from hiperion.serializers import *
 
 import requests
+
+class CustomPagination(PageNumberPagination):
+    page_size = 30
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+    def get_paginated_response(self, data):
+        if not self.page.has_next():
+          page_number = None
+        else:
+          page_number = self.page.next_page_number()
+        
+        return Response({
+            'next': page_number, #self.get_next_link(),
+            #'next': self.get_next_link(),
+            # 'previous': self.page.previous_page_number() #self.get_previous_link()
+            'count': self.page.paginator.count,
+            'size': self.page_size,
+            'results': data
+        })
 
 class Submit(APIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
@@ -78,10 +99,12 @@ class Submit(APIView):
         return Response(content)
         #return Response({})
 
-class PostListCreate(generics.ListCreateAPIView):
+    
+class PostCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
     serializer_class = PostSerializer
+    #pagination_class = CustomPagination #implementation custom pagination
 
     def perform_create(self, serializer): #se ejecuta en el POST para crear una publicacion
 
@@ -95,45 +118,53 @@ class PostListCreate(generics.ListCreateAPIView):
         serializer.save(
             author=self.request.user, list=list[len(list)-1] if len(list) > 0 else None) #,emoji=":%s:" % self.request.data["emoji"])
 
+
+class PostList(generics.ListAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = PostSerializer
+    pagination_class = CustomPagination #implementation custom pagination
+
     def get_queryset(self): #consultar
 
         #print(target)
         #print('user',self.request.user)
 
-        user_id = self.request.user
-
-        if self.kwargs is not None and 'username' in self.kwargs:
-          print('username',self.kwargs["username"])
+        if self.kwargs is not None and 'username' in self.kwargs: #users posts
+          #print('username',self.kwargs["username"])
 
           user_id = User.objects.get(username=self.kwargs["username"])
           #print('user_id',user_id.id)
           #print(user_id.query)
+          
+          queryset = Post.objects.filter(author=user_id).order_by('-created_at','-votes')
+          
+        else: # user feed
 
-        queryset = Post.objects.filter(author=user_id).order_by('-created_at','-votes')
+          user_id = self.request.user
 
+          queryset = Post.objects.filter(author=user_id).order_by('-created_at','-votes')
 
-        #follower_ids = Follower.objects.filter(follower=self.request.user).values_list('user',flat=True)
-        follower_ids = Follower.objects.filter(follower=user_id).values_list('user',flat=True)
-        #print(follower_ids)
-        #print(follower_ids.query)
+          #follower_ids = Follower.objects.filter(follower=self.request.user).values_list('user',flat=True)
+          follower_ids = Follower.objects.filter(follower=user_id).values_list('user',flat=True)
+          #print(follower_ids)
+          #print(follower_ids.query)
 
-        suscription_ids = Suscription.objects.filter(user=user_id).values_list('source',flat=True)
-        #print(follower_ids)
-        #print(follower_ids.query)
+          if follower_ids:
+              #print("hola follower_ids")
+              queryset = queryset | Post.objects.filter(author_id__in=follower_ids)
 
-        if follower_ids:
-            #print("hola follower_ids")
-            queryset = queryset | Post.objects.filter(author_id__in=follower_ids)
+              #print('query:',queryset.query)
+              #print('query:',queryset.explain(verbose=True))
 
-            #print('query:',queryset.query)
-            #print('query:',queryset.explain(verbose=True))
+          """suscription_ids = Suscription.objects.filter(user=user_id).values_list('source',flat=True)
+          if suscription_ids:
+              #print("hola suscription_ids")
 
-        if suscription_ids:
-            #print("hola suscription_ids")
-
-            queryset = queryset | Post.objects.filter(link__contains=suscription_ids)
-            #print('query2:',queryset.query)
-
+              queryset = queryset | Post.objects.filter(link__contains=suscription_ids)
+              #print('query2:',queryset.query)
+          """
+        
         return queryset
 
     """def dispatch(self, *args, **kwargs):
@@ -147,20 +178,26 @@ class PostListCreate(generics.ListCreateAPIView):
 
         return response """
 
-class PostUserList(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+class RecentPostsList(generics.ListAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
     serializer_class = PostSerializer
+    pagination_class = CustomPagination #implementation custom pagination
 
     def get_queryset(self): #consultar
+      
+      queryset = Post.objects.order_by('-created_at','-votes')[:30]
 
-        """
-        print("PostUserList")
-        print('username',self.kwargs["username"])
-        print('list',self.kwargs["list"])
-        """
+      return queryset
+      
+    
+class PostUserList(generics.ListAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
-        #user_id = self.request.user
+    serializer_class = PostSerializer
+    pagination_class = CustomPagination #implementation custom pagination
+
+    def get_queryset(self): #consultar
 
         if self.kwargs is not None and ('username' and 'list') in self.kwargs:
           print("filtro")
@@ -172,6 +209,50 @@ class PostUserList(generics.ListAPIView):
 
         return queryset
 
+class PostUserEmoji(generics.ListAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = PostSerializer
+    pagination_class = CustomPagination #implementation custom pagination
+
+    def get_queryset(self): #consultar
+
+        if self.kwargs is not None and ('username' and 'emoji') in self.kwargs:
+          print("PostUserEmoji")
+
+          user_id = User.objects.get(username=self.kwargs["username"])
+          emoji_id = self.kwargs["emoji"]
+
+        queryset = Post.objects.filter(author=user_id,emoji=emoji_id).order_by('-created_at','-votes')
+
+        return queryset
+      
+"""class PostCommunityList(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = PostSerializer
+
+    def get_queryset(self): #consultar
+
+
+        print("PostUserList")
+        print('username',self.kwargs["username"])
+        print('list',self.kwargs["list"])
+
+
+        #user_id = self.request.user
+
+        if self.kwargs is not None and 'community' in self.kwargs:
+          print("community",self.kwargs["community"])
+
+          #user_id = User.objects.get(username=self.kwargs["username"])
+          slug = self.kwargs["community"]
+          #community_id = Community.objects.get(slug=self.kwargs["community"])
+
+        queryset = Post.objects.filter(community_slug=slug).order_by('-created_at','-votes')
+
+        return queryset
+"""
 
 class PostActivityView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
@@ -258,8 +339,8 @@ class PostActivityRePostDestroy(generics.DestroyAPIView):
             pass
         return Response(status=status.HTTP_204_NO_CONTENT) #si no ocurre error
 
-class AccountRetrieve(generics.RetrieveAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+"""class AccountRetrieve(generics.RetrieveAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
     serializer_class = AccountSerializer
 
@@ -270,14 +351,48 @@ class AccountRetrieve(generics.RetrieveAPIView):
         return obj
 
     def get_queryset(self): #busca el registro con el filtro personalizado
-        #print("self.request.user",self.request.user.id)
+        print("self.request.user",self.request.user.id)
+
+        queryset = User.objects.filter(pk=self.request.user.id)
+
+        return queryset
+"""
+
+class TopUsersList(generics.ListAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = UserSerializer
+    #pagination_class = None
+
+    def get_queryset(self): #consultar
+      
+        activity_ids = Post.objects.values_list('author',flat=True).annotate(cnt=models.Count('id')).filter(cnt__gte=3) #consulta los usuarios con 3 o mas posts
+
+        queryset = User.objects.filter(pk__in=list(activity_ids))[:30]
+
+        return queryset
+
+      
+class CurrentUserRetrieve(generics.RetrieveAPIView):
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = UserSerializer
+
+    def get_object(self): #para sobreescribir el parametro pk por el filtro implementado en get_queryset
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset)
+
+        return obj
+
+    def get_queryset(self): #busca el registro con el filtro personalizado
+        print("self.request.user",self.request.user.id)
 
         queryset = User.objects.filter(pk=self.request.user.id)
 
         return queryset
 
 class UserRetrieve(generics.RetrieveAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
     serializer_class = UserSerializer
 
@@ -297,9 +412,10 @@ class UserRetrieve(generics.RetrieveAPIView):
         return queryset
 
 class UserList(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
     serializer_class = UserListSerializer
+    #pagination_class = None
 
     def get_queryset(self): #consultar
 
@@ -319,6 +435,32 @@ class UserList(generics.ListAPIView):
         queryset = Post.objects.filter(author=user_id,list__isnull=False).distinct('list').order_by('list')
 
         return queryset
+
+#listar las comunidades a las que pertenece un usuario
+"""class UserCommunities(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
+
+    serializer_class = MemberSerializer
+
+    def get_queryset(self): #consultar
+
+
+        print("PostUserList")
+        print('username',self.kwargs["username"])
+        print('list',self.kwargs["list"])
+
+
+        #user_id = self.request.user
+
+        if self.kwargs is not None and 'username' in self.kwargs:
+          print("filtro")
+
+          user_id = User.objects.get(username=self.kwargs["username"])
+
+        queryset = Member.objects.filter(user=user_id)
+
+        return queryset
+"""
 
 class FriendshipListCreate(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { Link } from 'react-router-dom';
 import throttle from 'lodash.throttle';
-import Tippy from '@tippy.js/react';
 import UserService from './UserService';
 
 const userService = new UserService();
@@ -100,33 +99,31 @@ class FollowButton extends PureComponent {
 
   render() {
     const {status,disabled,photo} = this.state;
-    const {username,title} = this.props;
+    const {username} = this.props;
 
     return (
         <React.Fragment>
-        <span>
         { status && status=='nofollow' &&
-          <a className={!disabled?'button is-small is-rounded has-te1xt-link is-success':'button is-small is-rounded has-text-link is-loading'} onClick={this.handleClickFollow}>
-            Follow
+          <a className={!disabled?'button is-black':'button has-text-link is-loading'} onClick={this.handleClickFollow}>
+            Follow to @{username}
           </a>
         }
         { status && status=='following' &&
           <div className="dropdown is-hoverable">
             <div className="dropdown-trigger">
-              <button className={!disabled?'button is-small is-rounded is-link':'button is-small is-rounded is-link is-loading'} aria-haspopup="true" aria-controls="dropdown-menu3">
-                <span>Following</span>
+              <button className={!disabled?'button is-link':'button is-link is-loading'} aria-haspopup="true" aria-controls="dropdown-menu3">
+                <span>Following to @{username}</span>
               </button>
             </div>
             <div className="dropdown-menu" id="dropdown-menu3" role="menu">
               <div className="dropdown-content">
-                <a className="dropdown-item is-size-7" onClick={this.handleClickUnFollow}>
-                  Unfollow <strong>@{username}</strong>
+                <a className="dropdown-item" onClick={this.handleClickUnFollow}>
+                  Unfollow <strong>@{username} ☹️</strong>
                 </a>
               </div>
             </div>
           </div>
         }
-        </span>
         </React.Fragment>
     );
   }

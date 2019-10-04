@@ -1,11 +1,15 @@
 import React, { PureComponent } from "react";
 import throttle from 'lodash.throttle';
+
+import { AuthContext } from './Context';
 import PostService from './PostService';
 
 const postService = new PostService();
 const waitTime = 1000;
 
 class Vote extends PureComponent {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -36,7 +40,7 @@ class Vote extends PureComponent {
   }
 
   SendVote = () => {
-    postService.createVote(
+    postService.updateVote(
       {
         "post": this.props.id,
         "status": 'vote',
@@ -72,32 +76,40 @@ class Vote extends PureComponent {
 
   render() {
     const {votes,voted,disabled} = this.state;
+    let button;
+    
+    if(this.context.currentUser){
+      if(!voted){
+        button = <a onClick={this.handleClickVote} className={!disabled?'button is-danger':'button is-danger is-loading'}>
+                    <span className="icon">
+                      <i className="uil uil-heart is-size-5"></i>
+                    </span>
+                    {votes>0 &&
+                      <span className="is-size-6">{votes}</span>
+                    }
+                 </a>;
+      }else{
+        button = <a onClick={this.handleClickUnVote} className={!disabled?'button is-danger':'button is-danger is-loading'}>
+                    <span className="icon icon-voted">
+                      <i className="uil uil-check is-size-4"></i>
+                    </span>
+                    {votes>0 &&
+                      <span className="is-size-6">{votes}</span>
+                    }
+                 </a>;
+      }
+    }else{
+      button = <a className={!disabled?'button is-danger tooltip tooltip-top':'button is-danger is-loading'} aria-label="You need to log in to vote! Not registered? Click on 'Log in' to get started for free." >
+                  <span className="icon">
+                    <i className="uil uil-heart is-size-5"></i>
+                  </span>
+                  {votes>0 &&
+                    <span className="is-size-6">{votes}</span>
+                  }
+               </a>;
+    }
 
-    return (
-        <React.Fragment>
-        <div className="columns is-mobile is-gapless has-margin-bottom-0">
-          <div className="column is-narrow">
-          {!voted ? (
-            <a onClick={this.handleClickVote} className={!disabled?'button is-rounded is-small':'button is-rounded is-small is-loading is-paddingl1ess is-shadowl1ess is-inl1ine is-wh1ite'}>
-              <span className="icon">
-                <i className="uil uil-heart"></i>
-              </span>
-              <span className="is-size-7">vote</span>
-            </a>
-          ) : (
-            <a onClick={this.handleClickUnVote} className={!disabled?'button is-rounded is-small':'button is-rounded is-small is-loading is-paddi1ngless is-shadowle1ss is-in1line is-wh1ite'}>
-              <span className="icon icon-voted">
-                <i className="uil uil-heart"></i>
-              </span>
-              {votes>0 &&
-                <span className="is-size-7">{votes}</span>
-              }
-            </a>
-          )}
-          </div>
-        </div>
-        </React.Fragment>
-    );
+    return (button);
   }
 }
 

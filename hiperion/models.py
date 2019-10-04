@@ -6,9 +6,12 @@ from django.utils.text import slugify
 
 #Transactions classes
 class User(AbstractUser):
-    country = models.CharField(max_length=30)
+    location = models.CharField(max_length=30)
     language = models.CharField(max_length=2)
     photo = models.ImageField(upload_to='photo/',null=True)
+    cover = models.ImageField(upload_to='cover/',null=True)
+    about = models.CharField(null=True,max_length=140)
+    team_flag = models.BooleanField(default=False)
 
 class Follower(models.Model):
     class Meta:
@@ -27,6 +30,7 @@ class Follower(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+#para suscribirse a una fuente (ej elpais.com.co)
 class Suscription(models.Model):
     STATUSES = (
         ('follow', 'follow'),
@@ -67,6 +71,8 @@ class Post(models.Model):
 
     #channel = models.ForeignKey('Channel',on_delete=models.CASCADE, related_name='channels')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='authors')
+    #community = models.ForeignKey('Community', on_delete=models.CASCADE, related_name='communities')
+    community_slug = models.CharField(null=True,max_length=20)
 
     created_at = models.DateTimeField(auto_now_add=True,db_index=True)
 
@@ -108,3 +114,34 @@ class Activity(models.Model):
 
     class Meta:
         unique_together = ('post', 'user', 'status')
+
+#para suscribirse a una comunidad
+class Member(models.Model):
+    STATUSES = (
+        ('follow', 'follow'),
+        ('unfollow', 'unfollow'),
+    )
+
+    id = models.AutoField(primary_key=True)
+
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    community = models.ForeignKey('Community', on_delete=models.CASCADE, related_name='members')
+    status = models.CharField(max_length=10, choices=STATUSES, default='follow')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Community(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    name = models.CharField(max_length=20)
+    text = models.CharField(default='',max_length=140)
+    slug = models.SlugField(unique=True,editable=False,max_length=20)
+
+    creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='creators')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)

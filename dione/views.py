@@ -3,26 +3,38 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
 def index(request):
-    if request.user.is_authenticated:
+    return render(request, 'app/index.html')
+  
+    """if request.user.is_authenticated:
       return render(request, 'app/index.html')
     else:
       return render(request, 'index.html')
+    """
 
-@login_required
+#@login_required
 def profile(request,pk):
     return render(request, 'app/index.html')
 
-@login_required
+#@login_required
 def profilelist(request,pk,list):
     return render(request, 'app/index.html')
 
-@login_required
+#@login_required
+def profileemoji(request,pk,emoji):
+    return render(request, 'app/index.html')
+  
+#@login_required
 def following(request,pk):
     return render(request, 'app/index.html')
 
 @login_required
 def submit(request,url):
     return render(request, 'app/index.html')
+
+"""@login_required
+def community(request,pk):
+    return render(request, 'app/index.html')
+"""    
 
 def terms(request):
       return render(request, 'terms.html')

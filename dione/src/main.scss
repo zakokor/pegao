@@ -1,20 +1,26 @@
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis:400,600&display=swap');
+//@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis:400,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Dosis:400,600&display=swap');
+@import url('https://unicons.iconscout.com/release/v1.0.0/css/unicons.css');
+
+//.body {font-family:IBM Plex Sans,serif}
 
 $section-padding: 3.8rem 0rem 0rem 0rem !default;
+$section-padding: 0rem !default;
 $section-padding-medium: 9rem 1.5rem 0rem !default;
 $footer-padding: 1.5rem 1.5rem 6rem;
 
-$body-background-color: hsl(0, 0%, 96%);
+//$body-background-color: hsl(0, 0%, 98%);
 
-$card-shadow: none;
+//$card-shadow: none;
+$card-header-shadow: 0 1px 0 rgba(10, 10, 10, 0.1);
 $body-line-height: normal;
 $body-family: 'IBM Plex Sans', serif;
-$family-secondary: 'Roboto', sans-serif;
+//$family-secondary: 'Roboto', sans-serif;
 
 //color items en el menu superior principal
-$navbar-item-color:hsl(250, 71%, 43%);
+//$navbar-item-color:hsl(250, 71%, 43%);
 $navbar-height: 3.7rem;
 
 $navbar-item-img-max-height: 2.3rem;
@@ -24,11 +30,113 @@ $link: hsl(226, 100%, 66%);
 $tabs-link-color: hsl(226, 100%, 66%);
 $tabs-link-hover-border-bottom-color: hsl(217, 71%, 53%);
 $tabs-link-active-color: hsl(0, 0%, 21%);
-$tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
+$tabs-border-bottom-width: 1px;
+//$tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
+//$tabs-border-bottom-style: none;
+
+$red: hsl(345, 100%, 61%);
 
 @import "~bulma/bulma";
+//@import "~@iconscout/unicons/css/unicons";
 
 //custom zakokor 01-03-19
+.has-min-height-550 { min-height:550px; }
+.has-min-height-480 { min-height:480px; }
+
+.posts {
+  &:hover {
+    background-color: #f7ffa1;//hsl(0, 0%, 98%);
+  }
+}
+
+.post-separator {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  align-self: stretch;
+  color: rgb(235, 236, 237);
+  /*margin-top: 24px;
+  margin-right: 0px;
+  margin-bottom: 24px;
+  margin-left: 0px;*/
+  text-align: center;
+  -webkit-user-select: none;
+}
+
+.post-separator hr {
+  display: inline-block;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  background: none;
+  margin: 0;
+  box-shadow: inset 0 -1px 0px 0px rgba($grey, 0.1);
+}
+
+.post-avatar {
+  position: relative;
+}
+.emoji-overlay {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+}
+
+.has-border-radius-5 { border-radius: 0.5rem; }
+
+.card-cover {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  overflow:hidden;
+  padding-bottom:40px;
+  .header {
+    height: 120px;
+    background: #5e05ff;
+    .card-avatar {
+      width: 80px;
+      height: 100%;
+      position: relative;
+      margin: 0 auto;
+      img, p {
+        font-size: $size-2;
+        width: 80px;
+        height: 80px;
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        bottom: -42px;
+        border: 4px solid white;
+      }
+    }
+  }
+}
+
+.card-body {
+    padding: 30px 0 30px;
+    //overflow: visible !important;
+    .user-meta {
+      //padding-top: 20px;
+      .fullname {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .username {
+        font-size: 90%;
+        color: #5e05ff;
+      }
+    }
+   .user-bio {
+      padding-top: 8px;
+      font-size: 92%;
+      color: $grey;
+    }
+  }
+
 .mini-cards {
   counter-reset: bd-links;
 }
@@ -77,9 +185,14 @@ $tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
   position: relative;
 }
 
-
 .is-borderless { border:0 }
-.is-border-bottom { border:0;border-bottom:1px solid $grey }
+.is-border-bottom { border:0; border-bottom:1px solid $grey-lighter }
+.has-border-left { border-left:1px solid $grey-lighter }
+.has-border-right { border-right:1px solid $grey-lighter }
+//.has-box-shadow { box-shadow: 0 1px 1px rgba($black, 0.1); }
+.has-box-shadow { box-shadow: inset 0 -1px 0px 0px rgba(10, 10, 10, 0.1); }
+
+/*.has-box-shadow { box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1) };*/
 
 .navbar.is-pegao {
     //background-color: #0b3a86;
@@ -153,7 +266,7 @@ svg {
 .width100 {
   width:100px;
 }
-.is-square { border-radius1: 0.3rem; border1: 1px solid $grey; margin-lef1t:10px; margin-ri1ght:10px; padding:10px 15px }
+//.is-square { border-radius1: 0.3rem; border1: 1px solid $grey; margin-lef1t:10px; margin-ri1ght:10px; padding:10px 15px }
 
 .is-size-5-1 {
     font-size: 1.04rem !important;
@@ -173,6 +286,9 @@ svg {
 .has-text-patreon {
   color: #f96854;
 }
+.has-background-yellow {
+  background-color: #ffe01b;
+}
 .has-background-orange {
   background-color: #f15a24
 }
@@ -183,7 +299,7 @@ svg {
   background-color: #232b97;
 }
 .has-background-light-blue {
-  background-color: #e6efff;
+  background-color: #f6f6ff;
 }
 .has-background-facebook {
   background-color: #4267b2;
@@ -196,9 +312,21 @@ svg {
   color: #fff;
 }
 
+.pegao-footer {
+  width:100%;
+  color: $grey;
+  font-size: $size-7;
+  border-top: 1px solid $grey-lighter;
+}
+
 //on desktop
 @media screen and (min-width: $desktop) {
-  .avatar { height: 40px; width:40px; font-size: $size-4; padding1: 7.5px; }
+  .card-profile {
+    border-radius: 0.5rem;
+    margin: 25px;
+  }
+  
+  .avatar { height: 24px; width:24px; font-size: $size-4; padding1: 7.5px; }
   .avatar.is-small { height: 42px; width:42px; font-size: $size-6; }
   .avatar.is-medium { height: 64px; width:64px; font-size: $size-4; }
   .textarea.is-large {
@@ -210,10 +338,24 @@ svg {
   .title.is-auto-3 {
     font-size: 2rem;
   }
+  .emoji-filter {
+    width:40px;
+    padding:10px 5px;
+  }
 }
 //on touch screen
 @media screen and (max-width: $desktop - 1px) {
-  .avatar { height: 40px; width:40px; font-size: $size-6; }
+  .card-profile {
+    border-radius: 0;
+    //padding: 25px 25px 0px 25px;
+    box-shadow: none;
+    background: $white-bis;
+  }
+  .card-cover {
+    border-radius: 0;
+  }
+
+  .avatar { height: 24px; width:24px; font-size: $size-6; }
   .avatar.is-small { height: 32px; width:32px; font-size: $size-6; }
   .avatar.is-medium { height: 64px; width:64px; }
   .textarea.is-large {
@@ -224,6 +366,9 @@ svg {
   }
   .title.is-auto-3 {
     font-size: 1.2rem;
+  }
+  .emoji-filter {
+    padding:10px 15px;
   }
 }
 .image img.is-squared-rounded { -moz-border-radius: 0.5rem; border-radius: 0.5rem; }
@@ -243,6 +388,8 @@ svg {
 }
 
 // spacing helpers settings
+.has-padding-10-15 { padding:10px 15px }
+
 $range-start: 0 !default;
 $range-end: 50 !default;
 $interval: 5 !default;
@@ -270,7 +417,7 @@ $current: $range-start;
 
   $current: $current + $interval;
 }
-
+.has-margin-left-auto{margin-left: auto}
 .has-top-right {
     top: 1em;
     right: 1.5em;
@@ -317,7 +464,7 @@ table tbody > p {
 
 
 //icons
-.icon-voted{ color: hsl(339, 100%, 46.5%); background-color1: hsl(339, 100%, 46.5%); -moz-border-radius: 50%; border-radius: 50%;}
+.icon-voted{ color: hsl(339, 100%, 46.5%); background-color1: hsl(339, 100%, 46.5%); -moz-border-ra1dius: 50%; border-ra1dius: 50%;}
 
 .icon-svg{height:1rem;width:1rem;background-position:center;background-repeat:no-repeat;background-size:contain;display:inline-block;vertical-align:middle;}
 .icon-pegao,.icon-svg:hover{filter: brightness(0.5) sepia(1) hue-rotate(200deg) saturate(8); }
@@ -326,7 +473,8 @@ table tbody > p {
 .icon-pegar{height:0.9rem;width:0.9rem;background-image:url("/static/img/repegar.svg")}
 
 //emojis
-.em,.em-svg{height:1rem;width:1rem;background-position:center;background-repeat:no-repeat;background-size:contain;display:inline-block;vertical-align:middle}
+.em,.em-svg{height:1.6rem;width:1.6rem;background-position:center;background-repeat:no-repeat;background-size:contain;display:inline-block;vertical-align:middle}
+.em.is-small {height:1.2rem;width:1.2rem;margin:10px}
 .em.is-large {height:2rem;width:2rem;margin:10px}
 .em.is-extra-large {height:3rem;width:3rem;margin:10px}
 
@@ -340,7 +488,7 @@ table tbody > p {
 .em-fire.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f525.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f525.svg"),none}
 
 .em-bulb{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4a1.png")}
-.em-bulb.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4a1.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4a1.svg"),none}
+.em-bulb.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4a1.png") no-repeat;background-image:url("https://twemoji.maxcdn.com/2/svg/1f4a1.svg"),none}
 
 .em-joy{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f602.png")}
 .em-joy.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f602.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f602.svg"),none}
@@ -348,8 +496,8 @@ table tbody > p {
 .em-rage{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f621.png")}
 .em-rage.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f621.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f621.svg"),none}
 
-.em-heart{background-image:url("https://twemoji.maxcdn.com/2/72x72/2764.png")}
-.em-heart.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/2764.png");background-image:url("https://twemoji.maxcdn.com/2/svg/2764.svg"),none}
+.em-heart{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f49c.png")}
+.em-heart.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f49c.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f49c.svg"),none}
 
 .em-round_pushpin{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f4cd.png")}
 .em-round_pushpin.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f4cd.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f4cd.svg"),none}
@@ -420,58 +568,51 @@ table tbody > p {
 .em-clap{background-image:url("https://twemoji.maxcdn.com/2/72x72/1f44f.png")}
 .em-clap.em-svg{background:url("https://twemoji.maxcdn.com/2/72x72/1f44f.png");background-image:url("https://twemoji.maxcdn.com/2/svg/1f44f.svg"),none}
 
+/*Tooltip*/
+$tooltip-distance: 0.3rem;
 
-//tooltip
-.tippy-tooltip.grey-theme {
-  color: $white;
-  font-size: $size-7;
-  padding:0 4px 0 4px;
-  //font-weight: $weight-bold;
-  background-color: $grey;
-  border: 1px solid $white;
-}
-.tippy-tooltip.grey-theme[data-animatefill] {
-  background-color: transparent;
-}
-.tippy-tooltip.grey-theme .tippy-backdrop {
-  background-color: $grey;
-}
-.tippy-tooltip.grey-theme[x-placement^='top'] .tippy-arrow {
-  border-top-color: $grey;
-}
-.tippy-tooltip.grey-theme[x-placement^='bottom'] .tippy-arrow {
-  border-bottom-color: $grey;
-}
-.tippy-tooltip.grey-theme[x-placement^='left'] .tippy-arrow {
-  border-left-color: $grey;
-}
-.tippy-tooltip.grey-theme[x-placement^='right'] .tippy-arrow {
-  border-right-color: $grey;
-}
+[aria-label].tooltip {
+  position: relative;
 
-.tippy-tooltip.orange-theme {
-  color: $white;
-  font-size: $size-7;
-  padding:0 4px 0 4px;
-  //font-weight: $weight-bold;
-  background-color: $orange;
-  border: 1px solid $white;
-}
-.tippy-tooltip.orange-theme[data-animatefill] {
-  background-color: transparent;
-}
-.tippy-tooltip.orange-theme .tippy-backdrop {
-  background-color: $orange;
-}
-.tippy-tooltip.orange-theme[x-placement^='top'] .tippy-arrow {
-  border-top-color: $orange;
-}
-.tippy-tooltip.orange-theme[x-placement^='bottom'] .tippy-arrow {
-  border-bottom-color: $orange;
-}
-.tippy-tooltip.orange-theme[x-placement^='left'] .tippy-arrow {
-  border-left-color: $orange;
-}
-.tippy-tooltip.orange-theme[x-placement^='right'] .tippy-arrow {
-  border-right-color: $orange;
+  &::after {
+    content: attr(aria-label);
+    display: none;
+    position: absolute;
+    z-index: 5000;
+    padding: 2px 8px;
+    white-space: nowrap;
+    text-indent: 0;
+    overflow: visible;
+    font-size: $size-7;
+    color: $white;
+    text-shadow: 1px 0 1px #888;
+    background-color: $blue;
+    -webkit-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    -webkit-box-shadow: 1px 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.3);
+  }
+
+  &-left {
+    &::before, &::after {
+      top: 50%;
+      right: 100%;
+    }
+  }
+  &-right {
+    &::before, &::after {
+      top: 50%;
+      left: 100%;
+    }
+  }
+  &-top {
+    &::before, &::after {
+      bottom: calc(100% + #{$tooltip-distance});
+      left: calc(50% - #{$tooltip-distance}); 
+    }
+  }
+    
+  &:hover::after, &:focus::after {
+    display: block;
+  }
 }

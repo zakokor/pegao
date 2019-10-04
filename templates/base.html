@@ -27,21 +27,12 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "img/apple-touch-icon-72x72.png" %}" />
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "img/apple-touch-icon-144x144.png" %}" />
   <link rel="stylesheet" href="{% static "dist/main.css" %}">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v1.0.0/css/unicons.css">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142105356-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-142105356-1');
-  </script>
   <title>{% block title %}Pegao - Save your links, it's free and social{% endblock %}</title>
 </head>
 <body>
 {% block header %}
-<nav class="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation">
+<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
       <img src="{% static "img/big.pegao.svg" %}" width="140px"> <span class="tag is-warning">beta</span>
@@ -108,7 +99,40 @@
 {% endblock %}
 
 {% block content %}{% endblock %}
+  
+<div class="pegao-footer has-text-centered has-background-white-bis">
+  <p class="has-padding-top-20">
+    <a class="has-margin-right-10" href="terms" target="_blank">Terms</a>
+    <a class="has-margin-right-10" href="privacy" target="_blank">Privacy policy</a>
+    <span class="has-margin-right-10">© 2019 Pegao</span>
+  </p>
+  <p class="has-text-centered has-padding-bottom-20">
+    This is a side project created by
+    <a href="https://pegao.co/@zakokor">
+      <span class="icon">
+        <i class="icon-svg icon-pegar icon-pegao"> </i>
+      </span>
+      <span>Gonzalo Aragón</span>
+    </a>.
+    <br/>
+    <a href="https://twitter.com/zakokor" target="_blank">
+      <span class="icon">
+        <i class="uil uil-twitter"></i>
+      </span>
+      Tweet me
+    </a> for help.
+  </p>
+</div>
 
 </body>
-{% block script %}{% endblock %}
+{% block script %}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142105356-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-142105356-1');
+  </script>
+{% endblock %}
 </html>

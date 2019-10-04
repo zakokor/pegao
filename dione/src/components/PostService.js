@@ -13,36 +13,54 @@ export default class PostService {
 		return axios.get(url).then(response => response);
 	}
 
-  getPosts() {
+  getPosts(page) {
     //console.log("getPosts");
-		const url = `${API_URL}/api/posts`;
+		const url = `${API_URL}/api/posts/?page=${page}`;
+		return axios.get(url).then(response => response);
+	}
+  
+  getRecentPosts(page) {
+    //console.log("getPosts");
+		const url = `${API_URL}/api/posts/recent?page=${page}`;
 		return axios.get(url).then(response => response);
 	}
 
-  getPostsbyUser(username) {
+  getPostsbyUser(username,page) {
     //console.log("getPosts");
-		const url = `${API_URL}/api/posts/${username}`;
+		const url = `${API_URL}/api/posts/${username}?page=${page}`;
 		return axios.get(url).then(response => response);
 	}
 
-  getPostsbyUserList(username,list) {
+  getPostsbyUserList(username,list,page) {
     //console.log("getPosts");
-		const url = `${API_URL}/api/posts/${username}/${list}`;
+		const url = `${API_URL}/api/posts/${username}/lists/${list}?page=${page}`;
 		return axios.get(url).then(response => response);
 	}
 
-  createPost(post){
+  getPostsbyUserEmoji(username,emoji,page) {
+    //console.log("getPosts");
+		const url = `${API_URL}/api/posts/${username}/emojis/${emoji}?page=${page}`;
+		return axios.get(url).then(response => response);
+	}
+	
+	/*getPostsbyCommunity(community) {
+    console.log("getPostsbyCommunity");
+		const url = `${API_URL}/api/community/posts/${community}`;
+		return axios.get(url).then(response => response);
+	}*/
+
+  updatePost(post){
 		console.log('post:'+JSON.stringify(post));
-    const url = `${API_URL}/api/posts/`;
+    const url = `${API_URL}/api/posts/update`;
 		return axios.post(url,post);
 	}
 
-  createView(post){
+  updateView(post){
     const url = `${API_URL}/api/activities/${post.id}/view`;
 		return axios.post(url,post);
 	}
 
-  createVote(post){
+  updateVote(post){
     const url = `${API_URL}/api/activities/${post.id}/vote`;
 		return axios.post(url,post);
 	}

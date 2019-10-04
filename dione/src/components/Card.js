@@ -1,14 +1,20 @@
 import React, { PureComponent } from "react";
 import { Link } from 'react-router-dom';
-import throttle from 'lodash.throttle';
-import Tippy from '@tippy.js/react';
+//import { withRouter } from 'react-router';
+//import throttle from 'lodash.throttle';
+
+import { AuthContext } from './Context';
+
 import UserService from './UserService';
+//import CardLists from './CardLists';
 import FollowButton from './FollowButton';
 
 const userService = new UserService();
 const waitTime = 1000;
 
 class Card extends PureComponent {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -16,11 +22,14 @@ class Card extends PureComponent {
   }
 
   componentDidMount(){
-    const { username } = this.props;
-    console.log('Card username:'+username);
-
-    if(username){
-      userService.getUser(username).then(res => {
+    const { match: { params } } = this.props;
+    //const { username } = this.props;
+    let currentUser = this.context.currentUser;
+    
+    console.log('Card params.username:'+params.username);
+    console.log('Card currentUser:'+currentUser);
+    if(params.username){
+      userService.getUser(params.username).then(res => {
             console.log('load getUser');
             console.log(res);
 
@@ -32,71 +41,112 @@ class Card extends PureComponent {
         }).catch(()=>{
             console.log('There was an error!');
         });
+    }else if(currentUser){
+      this.setState({ data: currentUser });
     }
   }
 
   render() {
     const {data} = this.state;
-    const {username} = this.props;
-    console.log('render card'+username);
+    let currentUser = this.context.currentUser;
+    //const {username} = this.props;
+    //console.log('render card'+username);
+
+    let divStyle = null;
+    if(data)
+      divStyle = {
+        width: '100%',
+        height: '120px',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(${data.cover})`,
+      };
+    
+    /*
+                  <span className="is-hidden-tou1ch">
+                <CardLists username={data.username} />
+              </span>
+    */
+    /*
+    <header className="card-header is-hidden-to1uch">
+                <p className="card-header-title">
+                  <Link to={`#`} className="has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
+                    <span>Following</span>
+                  </Link>
+                </p>
+              </header>
+              <header className="card-header is-hidden-tou1ch">
+                <p className="card-header-title">
+                  <Link to={`#`} className="has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
+                    <span>Followers</span>
+                  </Link>
+                </p>
+              </header>
+    */
+    /*
+                  <header className="card-header is-hidden-tou1ch">
+                <div className="card-header-title">
+                  <CardLists username={data.username} />
+                </div>
+              </header>
+    */
 
     return (
         <React.Fragment>
-          <div className="columns is-gapless is-mobile is-centered has-p1adding-15 has-ma1rgin-bottom-0 is-multiline has-background-white1-bis has-mar1gin-top-10">
-            <div className="column is-full has-text-right">
-              <div className="icon is-size-5">
-                <Tippy arrow={true} theme={'orange'} content="Soon!">
-                  <i className="uil uil-angle-down"></i>
-                </Tippy>
-              </div>
-            </div>
-            <div className="column is-narrow">
-              <div className="has-margin-bottom-10 has-pad1ding-right-15">
-                <Link to={`/@`+username} className="has-text-grey is-size-7 is-pull1ed-left">
-                  {data && data.photo?
-                    <figure className="image avatar is-medium">
-                      <img className="is-rounded" src={data.photo} />
-                    </figure>
-                    :
-                    <p className="avatar is-medium has-text-white has-background-orange has-text-centered is-uppercase has-padding-15">
-                        {username.charAt(0)}
-                    </p>
-                  }
-                </Link>
-              </div>
-            </div>
-            <div className="column is-full">
-              <div className="columns is-multiline is-mobile is-gapless has-margin-bottom-0">
-                <div className="column has-margin-lef1t-5">
-                  <div className="columns is-multiline is-mobile is-gapless has-margin-bottom-0 has-marg1in-top-5">
-                    <div className="column is-full has-margin-b1ottom-5 has-text-centered">
-                      <span className="has-text-grey-dark is-size-5 has-text-weight-semibold has-margin-ri1ght-10">{username}</span>
+          {data &&
+            <React.Fragment>
+            <div className="card card-profile">
+              <div className="card-content has-padding-0">
+                <div className="card-cover">
+                  <div className="header" style={divStyle}>
+                    <div className="icon is-size-5 is-pulled-right has-text-white">
+                        <i className="uil uil-angle-down tooltip tooltip-left" aria-label="Soon!"></i>
                     </div>
-                    <div className="column is-full has-text-centered">
-                      <Link to={`#`} className="is-size-7 has-margin-right-10" >
-                        <Tippy arrow={true} theme={'orange'} content="Soon!">
-                        <span>Following</span>
-                        </Tippy>
+                    <div className="card-avatar">
+                      <Link to={`/@`+data.username} className="has-text-grey is-size-7">
+                        {data && data.photo?
+                            <img className="is-rounded" src={data.photo} />
+                          :
+                          <p className="has-text-white has-background-orange has-text-centered is-uppercase has-padding-5">
+                              {data.username.charAt(0)}
+                          </p>
+                        }
                       </Link>
-                      <Link to={`#`} className="is-size-7 has-margin-right-10" >
-                        <Tippy arrow={true} theme={'orange'} content="Soon!">
-                        <span>Followers</span>
-                        </Tippy>
-                      </Link>
-                    </div>
-                    <div className="column is-full has-margin-top-10 has-text-centered">
-                      <FollowButton {...this.props} />
                     </div>
                   </div>
                 </div>
+                <div className="card-body has-text-centered">
+                  <div className="user-meta">
+                    <h3 className="fullname">{data.fullname}</h3>
+                    <h5 className="username">@{data.username}</h5>
+                  </div>
+                  <div className="user-bio has-text-centered">
+                    <Link to={`#`} className="has-margin-1right-10 has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
+                      <span>Following</span>
+                    </Link>
+                    <span className="has-text-grey-light">|</span>
+                    <Link to={`#`} className="has-margin-ri1ght-10 has-margin-left-10 tooltip tooltip-top" aria-label="Soon!">
+                      <span>Followers</span>
+                    </Link>
+                  </div>
+                  <div className="user-bio has-text-centered">
+                    <p>{data.about}</p>
+                  </div>
+                  {currentUser && currentUser.username!=data.username &&
+                    <div className="has-padding-top-10">
+                      <FollowButton username={data.username} />
+                    </div>
+                  }
+                </div>
               </div>
             </div>
-
-          </div>
+            </React.Fragment>
+          }
         </React.Fragment>
     );
   }
 }
 
-
 export default Card;
+//export default withRouter(Card);

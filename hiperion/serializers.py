@@ -2,7 +2,7 @@ from rest_framework import serializers
 from hiperion.models import *
 from django.db.models import F
 
-class AccountSerializer(serializers.ModelSerializer):
+"""class AccountSerializer(serializers.ModelSerializer):
 
     username = serializers.SerializerMethodField()
 
@@ -11,18 +11,23 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','country','language','photo')
-
+        fields = ('username','location','language','photo')
+"""
+        
 class UserSerializer(serializers.ModelSerializer):
 
+    fullname = serializers.SerializerMethodField()
     username = serializers.SerializerMethodField()
+
+    def get_fullname(self, obj): #se ejecuta en el GET para trer el nombre de usuario
+        return ' '.join(filter(bool, (obj.first_name, obj.last_name)))
 
     def get_username(self, obj): #se ejecuta en el GET para trer el nombre de usuario
         return obj.username
 
     class Meta:
         model = User
-        fields = ('username','country','language','photo')
+        fields = ('username','location','language','photo','cover','fullname','about','team_flag')
 
 #Consultar el listado de listas por usuario
 class UserListSerializer(serializers.ModelSerializer):
@@ -35,6 +40,28 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('username','list', )
+
+#listar las comunidades a las que pertence un usuario
+"""class MemberSerializer(serializers.ModelSerializer):
+
+    username = serializers.SerializerMethodField()
+    community_name = serializers.SerializerMethodField()
+    community_slug = serializers.SerializerMethodField()
+
+    def get_username(self, obj): #se ejecuta en el GET para traer el nombre de usuario
+        return obj.user.username
+
+    def get_community_name(self, obj): #se ejecuta en el GET para traer el nombre de usuario
+        return obj.community.name
+
+    def get_community_slug(self, obj): #se ejecuta en el GET para traer el nombre de usuario
+        return obj.community.slug
+
+    class Meta:
+        model = Member
+        #fields = '__all__'
+        exclude = ('id','user','community' )
+"""
 
 class FollowerSerializer(serializers.ModelSerializer):
 
@@ -54,11 +81,15 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
 
+    fullname = serializers.SerializerMethodField()
     username = serializers.SerializerMethodField()
     photo = serializers.SerializerMethodField()
     viewed = serializers.SerializerMethodField()
     voted = serializers.SerializerMethodField()
     reposted = serializers.SerializerMethodField()
+
+    def get_fullname(self, obj): #se ejecuta en el GET para trer el nombre de usuario
+        return ' '.join(filter(bool, (obj.author.first_name, obj.author.last_name)))
 
     def get_username(self, obj): #se ejecuta en el GET para traer el nombre de usuario
         return obj.author.username
@@ -69,33 +100,36 @@ class PostSerializer(serializers.ModelSerializer):
         else:
           return None
 
-    def get_viewed(self, obj): #se ejecuta en el GET para traer si el usuario ya visito por el post
+    def get_viewed(self, obj): #se ejecuta en el GET para traer si el usuario ya visito el post
         viewed = False
 
-        activity = Activity.objects.filter(post=obj.id,status='viewed',user=self.context['request'].user).count()
-        if activity > 0:
-            viewed = True
+        if self.context['request'].user.is_authenticated:
+          activity = Activity.objects.filter(post=obj.id,status='viewed',user=self.context['request'].user).count()
+          if activity > 0:
+              viewed = True
 
         return viewed
 
     def get_reposted(self, obj): #se ejecuta en el GET para traer si el usuario ya voto por el post
         reposted = False
-
-        activity = Activity.objects.filter(post=obj.id,status='repost',user=self.context['request'].user).count()
-        if activity > 0:
-            reposted = True
+        
+        if self.context['request'].user.is_authenticated:
+          activity = Activity.objects.filter(post=obj.id,status='repost',user=self.context['request'].user).count()
+          if activity > 0:
+              reposted = True
 
         return reposted
 
     def get_voted(self, obj): #se ejecuta en el GET para traer si el usuario ya voto por el post
         voted = False
 
-        activity = Activity.objects.filter(post=obj.id,status='vote',user=self.context['request'].user).count()
-        if activity > 0:
-            voted = True
+        if self.context['request'].user.is_authenticated:
+          activity = Activity.objects.filter(post=obj.id,status='vote',user=self.context['request'].user).count()
+          if activity > 0:
+              voted = True
 
         return voted
-
+    
     class Meta:
         model = Post
         exclude = ('author', )

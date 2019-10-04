@@ -1,11 +1,15 @@
 import React, { PureComponent } from "react";
 import throttle from 'lodash.throttle';
+
+import { AuthContext } from './Context';
 import PostService from './PostService';
 
 const postService = new PostService();
 const waitTime = 1000;
 
 class View extends PureComponent {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -23,7 +27,7 @@ class View extends PureComponent {
   }
 
   SendView = () => {
-    postService.createView(
+    postService.updateView(
       {
         "post": this.props.id,
         "status": 'viewed',
@@ -46,34 +50,40 @@ class View extends PureComponent {
   render() {
     const {views,viewed,disabled} = this.state;
     const {link} = this.props;
+    let button;
+    
+    if(this.context.currentUser){
+      if(!viewed){
+        button = <a href={link} target="_blank" rel="nofollow" onClick={this.handleClickView} className={!disabled?'button is-black':'button is-loading is-paddingless is-shadowless is-inline is-white'}>
+                    <span className="icon">
+                      <i className="uil uil-eye is-size-5"></i>
+                    </span>
+                    {views>0 &&
+                      <span className="has-text-gre1y is-size-6 has-paddin1g-left-5">{views}</span>
+                    }
+                 </a>;
+      }else{
+        button = <a href={link} target="_blank" rel="nofollow" className="button is-light">
+                    <span className="icon">
+                      <i className="uil uil-eye is-size-5"></i>
+                    </span>
+                    {views>0 &&
+                      <span className="has-text-gre1y is-size-6 has-paddin1g-left-5">{views}</span>
+                    }
+                 </a>;
+      }
+    }else{
+      button = <a href={link} target="_blank" rel="nofollow" className="button is-black">
+                    <span className="icon">
+                      <i className="uil uil-eye is-size-5"></i>
+                    </span>
+                    {views>0 &&
+                      <span className="has-text-gre1y is-size-6 has-paddin1g-left-5">{views}</span>
+                    }
+                 </a>;
+    }
 
-    return (
-        <React.Fragment>
-        <div className="columns is-mobile is-gapless has-margin-bottom-0">
-          <div className="column is-full">
-          {views>0 &&
-            <span className="has-text-grey is-size-7 has-paddin1g-left-5">{views}</span>
-          }
-          {!viewed ? (
-            <a href={link} target="_blank" onClick={this.handleClickView} className={!disabled?'has-text-link':'has-text-grey-lighter button is-loading is-paddingless is-shadowless is-inline is-white'}>
-              <span className="icon">
-                <i className="uil uil-window-restore"></i>
-              </span>
-            </a>
-          ) : (
-            <a href={link} target="_blank" className={!disabled?'has-text-grey':'has-text-grey-lighter button is-loading is-paddingless is-shadowless is-inline is-white'}>
-              <span className="icon">
-                <i className="uil uil-window-restore"></i>
-              </span>
-            </a>
-          )}
-          </div>
-
-        </div>
-        </React.Fragment>
-    );
-
-
+    return (button);
   }
 }
 
