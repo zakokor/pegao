@@ -26,8 +26,13 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static "img/apple-touch-icon-114x114.png" %}" />
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "img/apple-touch-icon-72x72.png" %}" />
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "img/apple-touch-icon-144x144.png" %}" />
+  
+  {% if debug_flag %}
   <link rel="stylesheet" href="{% static "dist/main.css" %}">
-
+  {% else %}
+  <link rel="stylesheet" href="https://pegao.netlify.com/main.css">
+  {% endif %}
+  
   <title>{% block title %}Pegao - Save your links, it's free and social{% endblock %}</title>
 </head>
 <body>

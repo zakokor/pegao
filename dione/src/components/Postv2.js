@@ -48,13 +48,13 @@ class Postv2 extends PureComponent {
 
       text = data.list && before?
               <React.Fragment>
-                <a href={data.link} target="_blank" rel="nofollow"><span className={styletext}>{before}</span></a> <Link to={`/@`+data.username+`/list/`+data.list}>{`/`+data.list}</Link> <a href={data.link} target="_blank" rel="nofollow"><span className={styletext}>{after}</span></a>
+                <a href={data.link} rel="nofollow"><span className={styletext}>{before}</span></a> <Link to={`/@`+data.username+`/list/`+data.list}>{`/`+data.list}</Link> <a href={data.link} target="_blank" rel="nofollow"><span className={styletext}>{after}</span></a>
               </React.Fragment>
              :
-              <a href={data.link} target="_blank" rel="nofollow"><span className={styletext}>{data.text}</span></a>;
+              <a href={data.link} rel="nofollow"><span className={styletext}>{data.text}</span></a>;
          ;
     }else{
-      text = <a href={data.link} target="_blank" rel="nofollow"><span className={styletext}>{data.text}</span></a>;
+      text = <a href={data.link} rel="nofollow"><span className={styletext}>{data.text}</span></a>;
     }
     //console.timeEnd("timer");
 
