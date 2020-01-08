@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-//import { Route } from 'react-router-dom';
 
 import HomePosts from './HomePosts';
 import CardTopUsers from './CardTopUsers';

@@ -1,13 +1,8 @@
 import React, { PureComponent } from "react";
-//import { Link } from 'react-router-dom';
 import key from "weak-key";
 import throttle from 'lodash.throttle';
-//import Card from './Card';
-//import CardLists from './CardLists';
-//import EmojiFilter from './EmojiFilter';
 import PostService from './PostService';
 import Post from './Postv2';
-//import MenuProfile from './MenuProfile';
 
 const postService = new PostService();
 const waitTime = 1000;

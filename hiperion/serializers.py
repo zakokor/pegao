@@ -1,18 +1,6 @@
 from rest_framework import serializers
 from hiperion.models import *
 from django.db.models import F
-
-"""class AccountSerializer(serializers.ModelSerializer):
-
-    username = serializers.SerializerMethodField()
-
-    def get_username(self, obj): #se ejecuta en el GET para trer el nombre de usuario
-        return obj.username
-
-    class Meta:
-        model = User
-        fields = ('username','location','language','photo')
-"""
         
 class UserSerializer(serializers.ModelSerializer):
 
@@ -41,28 +29,6 @@ class UserListSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('username','list', )
 
-#listar las comunidades a las que pertence un usuario
-"""class MemberSerializer(serializers.ModelSerializer):
-
-    username = serializers.SerializerMethodField()
-    community_name = serializers.SerializerMethodField()
-    community_slug = serializers.SerializerMethodField()
-
-    def get_username(self, obj): #se ejecuta en el GET para traer el nombre de usuario
-        return obj.user.username
-
-    def get_community_name(self, obj): #se ejecuta en el GET para traer el nombre de usuario
-        return obj.community.name
-
-    def get_community_slug(self, obj): #se ejecuta en el GET para traer el nombre de usuario
-        return obj.community.slug
-
-    class Meta:
-        model = Member
-        #fields = '__all__'
-        exclude = ('id','user','community' )
-"""
-
 class FollowerSerializer(serializers.ModelSerializer):
 
     follower = serializers.SerializerMethodField()
@@ -75,9 +41,7 @@ class FollowerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Follower
-        #fields = '__all__'
         exclude = ('id','user', )
-
 
 class PostSerializer(serializers.ModelSerializer):
 

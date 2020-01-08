@@ -29,11 +29,6 @@ export default class UserService {
 		return axios.get(url).then(response => response);
 	}
 
-	/*getUserCommunities(username) {
-		const url = `${API_URL}/api/users/${username}/communities`;
-		return axios.get(url).then(response => response);
-	}*/
-
   getFriendship(username) {
 		const url = `${API_URL}/api/friendships/${username}`;
 		return axios.get(url).then(response => response);

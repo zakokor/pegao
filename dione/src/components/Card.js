@@ -1,12 +1,7 @@
 import React, { PureComponent } from "react";
 import { Link } from 'react-router-dom';
-//import { withRouter } from 'react-router';
-//import throttle from 'lodash.throttle';
-
 import { AuthContext } from './Context';
-
 import UserService from './UserService';
-//import CardLists from './CardLists';
 import FollowButton from './FollowButton';
 
 const userService = new UserService();
@@ -23,7 +18,6 @@ class Card extends PureComponent {
 
   componentDidMount(){
     const { match: { params } } = this.props;
-    //const { username } = this.props;
     let currentUser = this.context.currentUser;
     
     console.log('Card params.username:'+params.username);
@@ -49,8 +43,6 @@ class Card extends PureComponent {
   render() {
     const {data} = this.state;
     let currentUser = this.context.currentUser;
-    //const {username} = this.props;
-    //console.log('render card'+username);
 
     let divStyle = null;
     if(data)
@@ -62,35 +54,6 @@ class Card extends PureComponent {
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${data.cover})`,
       };
-    
-    /*
-                  <span className="is-hidden-tou1ch">
-                <CardLists username={data.username} />
-              </span>
-    */
-    /*
-    <header className="card-header is-hidden-to1uch">
-                <p className="card-header-title">
-                  <Link to={`#`} className="has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
-                    <span>Following</span>
-                  </Link>
-                </p>
-              </header>
-              <header className="card-header is-hidden-tou1ch">
-                <p className="card-header-title">
-                  <Link to={`#`} className="has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
-                    <span>Followers</span>
-                  </Link>
-                </p>
-              </header>
-    */
-    /*
-                  <header className="card-header is-hidden-tou1ch">
-                <div className="card-header-title">
-                  <CardLists username={data.username} />
-                </div>
-              </header>
-    */
 
     return (
         <React.Fragment>
@@ -122,11 +85,11 @@ class Card extends PureComponent {
                     <h5 className="username">@{data.username}</h5>
                   </div>
                   <div className="user-bio has-text-centered">
-                    <Link to={`#`} className="has-margin-1right-10 has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
+                    <Link to={`#`} className="has-margin-right-10 tooltip tooltip-top" aria-label="Soon!">
                       <span>Following</span>
                     </Link>
                     <span className="has-text-grey-light">|</span>
-                    <Link to={`#`} className="has-margin-ri1ght-10 has-margin-left-10 tooltip tooltip-top" aria-label="Soon!">
+                    <Link to={`#`} className="has-margin-left-10 tooltip tooltip-top" aria-label="Soon!">
                       <span>Followers</span>
                     </Link>
                   </div>
@@ -149,4 +112,3 @@ class Card extends PureComponent {
 }
 
 export default Card;
-//export default withRouter(Card);

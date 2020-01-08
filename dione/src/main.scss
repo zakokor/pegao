@@ -1,29 +1,21 @@
 @charset "utf-8";
 
-//@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Roboto|Dosis:400,600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600|Dosis:400,600&display=swap');
-@import url('https://unicons.iconscout.com/release/v1.0.0/css/unicons.css');
-
-//.body {font-family:IBM Plex Sans,serif}
+@import url('https://unicons.iconscout.com/release/v2.0.1/css/unicons.css');
 
 $section-padding: 3.8rem 0rem 0rem 0rem !default;
 $section-padding: 0rem !default;
 $section-padding-medium: 9rem 1.5rem 0rem !default;
 $footer-padding: 1.5rem 1.5rem 6rem;
 
-//$body-background-color: hsl(0, 0%, 98%);
-
-//$card-shadow: none;
 $card-header-shadow: 0 1px 0 rgba(10, 10, 10, 0.1);
 $body-line-height: normal;
 $body-family: 'IBM Plex Sans', serif;
-//$family-secondary: 'Roboto', sans-serif;
 
-//color items en el menu superior principal
-//$navbar-item-color:hsl(250, 71%, 43%);
 $navbar-height: 3.7rem;
 
 $navbar-item-img-max-height: 2.3rem;
+$navbar-background-color: #121212;
 
 $link: hsl(226, 100%, 66%);
 
@@ -31,21 +23,37 @@ $tabs-link-color: hsl(226, 100%, 66%);
 $tabs-link-hover-border-bottom-color: hsl(217, 71%, 53%);
 $tabs-link-active-color: hsl(0, 0%, 21%);
 $tabs-border-bottom-width: 1px;
-//$tabs-link-active-border-bottom-color: hsl(0, 0%, 86%);
-//$tabs-border-bottom-style: none;
 
 $red: hsl(345, 100%, 61%);
 
 @import "~bulma/bulma";
-//@import "~@iconscout/unicons/css/unicons";
 
-//custom zakokor 01-03-19
+//custom
 .has-min-height-550 { min-height:550px; }
 .has-min-height-480 { min-height:480px; }
 
+.spinner {
+    height: 100vh;  
+    position: relative;
+    animation: spinAround .5s linear infinite;
+  
+    &::before {
+        border: solid 3px #eee;
+        border-bottom-color: $blue;
+        border-radius: 50%;
+        content: "";
+        height: 40px;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        width: 40px;
+    }
+}
+
 .posts {
   &:hover {
-    background-color: #f7ffa1;//hsl(0, 0%, 98%);
+    background-color: #f7ffa1;
   }
 }
 
@@ -59,10 +67,6 @@ $red: hsl(345, 100%, 61%);
   align-items: center;
   align-self: stretch;
   color: rgb(235, 236, 237);
-  /*margin-top: 24px;
-  margin-right: 0px;
-  margin-bottom: 24px;
-  margin-left: 0px;*/
   text-align: center;
   -webkit-user-select: none;
 }
@@ -118,9 +122,7 @@ $red: hsl(345, 100%, 61%);
 
 .card-body {
     padding: 30px 0 30px;
-    //overflow: visible !important;
     .user-meta {
-      //padding-top: 20px;
       .fullname {
         font-size: 18px;
         font-weight: 600;
@@ -137,66 +139,13 @@ $red: hsl(345, 100%, 61%);
     }
   }
 
-/*.mini-cards {
-  counter-reset: bd-links;
-}
-@media screen and (max-width: $desktop - 1px) {
-  .mini-cards {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-  }
-}
-@media screen and (min-width: $desktop) {
-  .mini-cards {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .mini-card {
-    width: 50%;
-  }
-}
-
-.mini-card:hover {
-  background-color: #fafafa;
-}
-.mini-card {
-  border-radius: 6px;
-  color: #7a7a7a;
-  display: block;
-  font-size: 1.25rem;
-  padding: 1rem 3rem 1.5rem 5rem;
-  position: relative;
-  transition-duration: 86ms;
-  transition-property: background-color,color;
-}
-.mini-card-figure {
-  position: absolute;
-  right: calc(100% + .75em);
-  text-align: center;
-  top: 0;
-  min-width: 1.5em;
-}
-.mini-card-name {
-  color: #363636;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: .25em;
-  position: relative;
-}*/
-
 .is-borderless { border:0 }
 .is-border-bottom { border:0; border-bottom:1px solid $grey-lighter }
 .has-border-left { border-left:1px solid $grey-lighter }
 .has-border-right { border-right:1px solid $grey-lighter }
-//.has-box-shadow { box-shadow: 0 1px 1px rgba($black, 0.1); }
 .has-box-shadow { box-shadow: inset 0 -1px 0px 0px rgba(10, 10, 10, 0.1); }
 
-/*.has-box-shadow { box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1) };*/
-
 .navbar.is-pegao {
-    //background-color: #0b3a86;
-    //color: #fff;
     border-bottom:1px solid $grey-lighter;
 }
 
@@ -213,11 +162,11 @@ $red: hsl(345, 100%, 61%);
   justify-content: center;
 }
 
-.is-inline-table{display:inline-table !important;} //submit.js
+.is-inline-table{display:inline-table !important;}
 
-.bd-patreon-button { display:inline-block;position:relative;vertical-align:top; }
-.bd-patreon-button img{ border-radius:4px;display:block;max-height:none!important; }
-.bd-patreon-button:hover::after{ bottom:0;left:0;position:absolute;right:0;top:0;background-color:rgba(0,0,0,.05);border-radius:4px;content:"";display:block; }
+.bd-button { display:inline-block;position:relative;vertical-align:top }
+.bd-button img{ border-radius:4px;display:block;max-height:none!important; }
+.bd-button:hover::after{ bottom:0;left:0;position:absolute;right:0;top:0;background-color:rgba(0,0,0,.05);border-radius:4px;content:"";display:block; }
 
 svg:not(:root).svg-inline { overflow: visible; }
 svg {
@@ -258,19 +207,27 @@ svg {
     color: #fff;
 }
 
-.image.is-200 {
-  //height: 48px;
-  width: 500px;
-}
+.image.is-400 { width: 400px; }
 
 //columns
-.width80 {
-  width:80px;
+.width80 { width:80px; }
+.width100 { width:100px; }
+
+.loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
 }
-.width100 {
-  width:100px;
-}
-//.is-square { border-radius1: 0.3rem; border1: 1px solid $grey; margin-lef1t:10px; margin-ri1ght:10px; padding:10px 15px }
 
 .is-size-5-1 {
     font-size: 1.04rem !important;
@@ -297,7 +254,7 @@ svg {
   background-color: #f15a24
 }
 .has-background-blue {
-  background-color: #3b49ff;
+  background-color: #2434f9;
 }
 .has-background-dark-blue {
   background-color: #232b97;
@@ -314,6 +271,26 @@ svg {
   background-color: #55acee;
   border-color: transparent;
   color: #fff;
+}
+
+.has-background-homepage {
+  background: $black-bis;
+  //color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.has-background-homepage:after {
+  background: inherit;
+  bottom: -8%;
+  content: '';
+  display: block;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(2.5deg);
+  transform-origin: 0;
+  z-index: -1;
 }
 
 .pegao-footer {

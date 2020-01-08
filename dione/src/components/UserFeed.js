@@ -1,17 +1,11 @@
 import React, { PureComponent } from "react";
 import { Route  } from 'react-router-dom';
-
 import key from "weak-key";
 import throttle from 'lodash.throttle';
-
 import { AuthContext } from './Context';
-
-//import SearchText from './SearchText';
 import SubmitText from './SubmitText';
 import Card from './Card';
-//import EmojiFilter from './EmojiFilter';
 import Post from './Postv2';
-//import MenuProfile from './MenuProfile';
 import PostService from './PostService';
 
 const postService = new PostService();
@@ -35,20 +29,6 @@ class UserFeed extends PureComponent {
 
   componentDidMount(){
     this.fetchPosts();
-    
-    /*const { match: { params } } = this.props;
-
-    postService.getPosts().then(res => {
-          console.log('load getPosts');
-          //console.log(res);
-
-          const data = res.data;
-          this.setState({ data: data, loaded: true });
-
-      }).catch(()=>{
-          console.log('There was an error!');
-          this.setState({ loaded: true });
-      });*/
   }
   
   handleClickMore = () => {
@@ -96,63 +76,59 @@ class UserFeed extends PureComponent {
 
   render() {
     const { data, loaded, disabled } = this.state;
-    //const { match: { params }, me } = this.props;
+
     let search, message, emojifilter;
     let currentUser = this.context.currentUser;
-    //let isMobile = window.innerWidth < 960;
-    
-    //console.log("window.innerWidth",window.innerWidth, isMobile)
-    
-    /*let divStyle = null;
-    if(!isMobile){
-      divStyle = {height: "480px", overflow: "auto"};
-    }*/
-    
-    /*
-                        <p className="has-text-centered">
-                      <a href="https://pegao.co/https://pegao.co/getting-started" className="button is-link is-rounded">Paste my first link</a>
-                    </p>
-    */
     
     search = '';//<SearchText onFilterTextChange={this.handleFilterTextChange} />; //descomentar cuando implemente la busqueda
-    /*emojifilter = <React.Fragment>
-                    <p className="help has-margin-bottom-5 is-hidden-desktop">You can see more pages in</p>
-                    <EmojiFilter />
-                  </React.Fragment>;*/
     
     if(loaded && data){
       if(data.length===0){ //si no devuelve datos, data se crea pero data.length no se crea.
         message = <div className="content is-medium has-padding-10 has-padding-top-30">
                     <h3>Hi @{currentUser.username}!</h3>
-                    <p>From now on you can start to save the links that inspire you and share them with others.</p>
-                    <p className="has-text-centered">
-                      <strong>Paste your first link</strong> in the field above and click
+                    <p>Start now to <strong>remember, organize and share</strong> the <strong>links</strong> that inspire you.</p>
+                    <p>
+                      <i className="uil uil-spin has-text-link is-size-5"></i>
+                      <strong className="is-size-5-1">Paste your first link</strong> in the field above and click
                       <span className="icon has-border-radius-5 has-background-link has-margin-5">
                         <i className="uil uil-enter"></i>
                       </span>
                       to save it
                     </p>
+                    <p><i className="uil uil-spin has-text-link is-size-5"></i><strong className="is-size-5-1">Create your own lists</strong> — written with a / symbol — or just choose an emoji.</p>
+                    <div className="columns is-desktop is-multiline is-gapless is-centered has-margin-left-50 has-margin-right-50 has-border-radius-5 has-padding-5 has-background-white">
+                      <div className="column has-margin-bottom-30 has-text-centered">
+                        <div className="is-flex is-horizontal-center">
+                          <figure className="image is-400 is-hidden-touch">
+                            <img src="static/img/screen-first-list.png" />
+                          </figure>
+                          <figure className="image is-hidden-desktop">
+                            <img src="static/img/screen-first-list.png" />
+                          </figure>
+                        </div>
+                        <p className="has-margin-top-10">
+                          <span className="has-margin-right-10"><i className="em em-svg em-speaking_head"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-heart has-padding-5"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-bulb"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-star"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-round_pushpin"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-shopping_trolley"></i></span>
+                          <span className="has-margin-right-10"><i className="em em-svg em-gift"></i></span>
+                          <i className="em em-svg em-bookmark"></i>
+                        </p>
+                      </div>
+                    </div>
+                    <p><i className="uil uil-spin has-text-link is-size-5"></i><strong className="is-size-5-1">Copy your link public profile</strong> <span className="tag is-link is-medium">https://pegao.co/@{currentUser.username}</span> and share it with the world.</p>
                     <p className="has-text-centered">
                        — or  —
                     </p>
-                    <p className="has-text-centered">
+                    <p className="has-text-centered has-margin-bottom-20">
                       <a href="/tour" target="_blank" className="button is-rounded">Take a tour</a>
                     </p>
-                    <p></p>
-                    <p></p>
                   </div>;
       }
     }
 
-    //      			<MenuProfile username={me} tab="Feed" />
-    //<Card username={currentUser.username} />
-    /*
-    <div className="column is-narrow has-background-white-bis">
-            <div className="emoji-filter">
-              {emojifilter}
-            </div>
-          </div>
-    */
     return (
       <React.Fragment>
       	<div className="columns is-desktop is-gapless">

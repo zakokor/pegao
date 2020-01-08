@@ -1,13 +1,9 @@
 import React, { PureComponent } from "react";
-//import { Link } from 'react-router-dom';
 import key from "weak-key";
 import throttle from 'lodash.throttle';
-//import Card from './Card';
 import Emoji from './Emoji';
-//import EmojiFilter from './EmojiFilter';
 import PostService from './PostService';
 import Post from './Postv2';
-//import MenuProfile from './MenuProfile';
 
 const postService = new PostService();
 const waitTime = 1000;
@@ -87,7 +83,7 @@ class PostsEmoji extends PureComponent {
 
     return (
       <React.Fragment>
-        <div className="has-padding-10-15 has-box-sh1adow has-background-light">
+        <div className="has-padding-10-15 has-background-light">
           <span className="has-margin-right-5">All posts by</span><Emoji value={params.emoji} />
         </div>
         {message}

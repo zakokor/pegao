@@ -1,14 +1,8 @@
 import React, { PureComponent } from "react";
-//import { Route, BrowserRouter, Switch  } from 'react-router-dom';
-//import { Link } from 'react-router-dom';
 import key from "weak-key";
 import throttle from 'lodash.throttle';
-//import Card from './Card';
-//import EmojiFilter from './EmojiFilter';
-//import SearchText from './SearchText';
 import PostService from './PostService';
 import Post from './Postv2';
-//import MenuProfile from './MenuProfile';
 
 const postService = new PostService();
 const waitTime = 1000;
@@ -40,54 +34,30 @@ class HomePosts extends PureComponent {
   }
 
   fetchPosts = () => {
-    //const { match: { params } } = this.props;
+    postService.getRecentPosts(this.state.next_page).then(res => {
+          console.log('load getPostsbyUser',this.state.next_page);
+          console.log(res);
 
-    //console.log('HomePosts params.username:'+params.username);
-    //console.log("HomePosts this.props.match",this.props.match)
-    
-    //console.time("timer fetchPosts");
-    
-    //if(params && params.username && this.state.next_page){
-      postService.getRecentPosts(this.state.next_page).then(res => {
-            console.log('load getPostsbyUser',this.state.next_page);
-            console.log(res);
+          const data = res.data.results;
+          const next_page = res.data.next;
 
-            const data = res.data.results;
-            const next_page = res.data.next;
-        
-            //console.log("this.state.data original",this.state.data);
-        
-            if(!this.state.data){
-              this.setState({ data: data, next_page: next_page, loaded: true, disabled: false });
-            }else{
-              this.setState({ data: [...this.state.data,...data,], next_page: next_page, loaded: true, disabled: false });
-            }
-            //console.log("this.state.data joined",this.state.data);
+          if(!this.state.data){
+            this.setState({ data: data, next_page: next_page, loaded: true, disabled: false });
+          }else{
+            this.setState({ data: [...this.state.data,...data,], next_page: next_page, loaded: true, disabled: false });
+          }
 
-        }).catch(()=>{
-            console.log('There was an error!');
-            this.setState({ loaded: true, disabled: false });
-        });
-    //}
-    
-    //console.timeEnd("timer fetchPosts");
+      }).catch(()=>{
+          console.log('There was an error!');
+          this.setState({ loaded: true, disabled: false });
+      });
   }
 
   render() {
     const { data, loaded, disabled } = this.state;
-    //const { match: { params, path } } = this.props;
+    
     let message;
-    
-    /*if(loaded && data){
-      if(data.length===0){ //si no devuelve datos, data se crea pero data.length no se crea.
-        if(params && params.username)
-          message = <div className="has-text-centered"><strong>@{params.username} hasn’t pasted any link</strong></div>;
-      }
-    }*/
-    //console.log("message",message,data.length,params.username)
-
-    //<MenuProfile username={params.username} tab="Posts" />
-    
+        
     return (
       <React.Fragment>
         <div className="has-padding-10-15 has-box-shadow">

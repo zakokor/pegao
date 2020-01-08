@@ -1,22 +1,11 @@
 import React, { PureComponent } from "react";
 import { Link } from 'react-router-dom';
-//import format from 'date-fns/format';
 import Emoji from './Emoji';
-//import View from './View';
-//import Vote from './Vote';
-//import RePost from './RePost';
 
 class Postv2 extends PureComponent {
   constructor(props) {
     super(props);
-    /*this.state = {
-      hover: false
-    }*/
   }
-
-  /*toggleHover = () => {
-    this.setState({hover: !this.state.hover})
-  }*/
 
   render() {
     const { data, showphoto } = this.props;
@@ -28,23 +17,9 @@ class Postv2 extends PureComponent {
     let text;
     
     let styletext = "has-margin-top-5 has-line-height-15 has-text-dark is-size-5-1";
-    /*if(text.length<20)
-      styletext += " is-size-5 ";
-    else if(text.length<50)
-      styletext += " is-size-5-1 ";
-    
-    /*if(data.emoji == 'smiley')
-      styletext += " has-border-radius-5 has-background-success ";
-    else if(data.emoji == 'star')
-      styletext += " has-border-radius-5 has-background-orange has-text-dark ";
-    else if(data.emoji == 'bulb')
-      styletext += " has-border-radius-5 has-background-yellow ";
-    else if(data.emoji == 'speaking_head')
-      styletext += " has-border-radius-5 has-background-black has-text-white ";*/
     
     if(data.list){
       let [before,after] = data.text.split(' /'+data.list);
-      //console.log("before",before,"after",after);
 
       text = data.list && before?
               <React.Fragment>
@@ -71,7 +46,7 @@ class Postv2 extends PureComponent {
           <div className={style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <div className="column is-narrow">
               {showphoto &&
-              <div className="post-avatar has-ma1rgin-5 has-padding-right-20">
+              <div className="post-avatar has-padding-right-20">
                 <Link to={`@`+data.username} className="has-text-grey is-size-7">
                   {data.photo?
                     <figure className="image avatar">

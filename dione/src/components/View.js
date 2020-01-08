@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import throttle from 'lodash.throttle';
-
 import { AuthContext } from './Context';
 import PostService from './PostService';
 

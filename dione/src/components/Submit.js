@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 import throttle from 'lodash.throttle';
-//import queryString from 'query-string';
-//import ContentEditable from "react-contenteditable";
 import PostService from './PostService';
 
 const postService = new PostService();
@@ -78,7 +76,6 @@ class Submit extends PureComponent {
 
       return this.setState({ currentcolumn: column, formFields: {...formFields } });
     }
-    console.log('es la misma columna');
 
     //const emojilists = [
         /*{
@@ -267,7 +264,7 @@ class Submit extends PureComponent {
       <section className="hero is-white is-fullheight-with-navbar">
         <div className="hero-body has-padding-top-0">
           <div className="container">
-            <form onSubmit={this.handleSubmit} className="has-backg1round-white">
+            <form onSubmit={this.handleSubmit}>
               <div className="columns is-multiline is-mobile is-centered is-gapless">
                 <div className="column is-three-fifths-desktop is-full-touch has-margin-bottom-10">
                   <h1 className="title is-auto-3 has-text-info">Save as...</h1>

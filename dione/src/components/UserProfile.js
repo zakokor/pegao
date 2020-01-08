@@ -1,15 +1,9 @@
 import React, { PureComponent } from "react";
 import { Route, Switch } from 'react-router-dom';
-//import { Link } from 'react-router-dom';
-//import key from "weak-key";
-//import throttle from 'lodash.throttle';
 import Card from './Card';
 import EmojiFilter from './EmojiFilter';
-//import SearchText from './SearchText';
 import MenuProfile from './MenuProfile';
-
 import Posts from './Posts';
-//import Lists from './Lists';
 import List from './List';
 import PostsEmoji from './PostsEmoji';
 import CardLists from './CardLists';
@@ -27,16 +21,6 @@ class UserProfile extends PureComponent {
     emojifilter = <React.Fragment>
                     <EmojiFilter />
                   </React.Fragment>;
-    
-    /*
-    <div className="column is-narrow has-background-white-bis">
-            <div className="emoji-filter has-text-centered">
-              {emojifilter}
-            </div>
-          </div>
-    */
-    
-    //<Route path="/@:username/lists"  exact  render={ props => <Lists key={props.match.params.username} {...props} /> } />
     
     return (
       <React.Fragment>

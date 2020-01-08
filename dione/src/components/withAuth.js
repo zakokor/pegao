@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-
 import UserService from './UserService';
 import { AuthContext } from './Context';
 
@@ -30,7 +29,6 @@ const withAuth = Component => {
 
         }).catch(()=>{
           console.log('You are not log in!');
-          //console.clear();
           this.setState({ isLoadingCurrentUser: false });
         });
     }
@@ -41,7 +39,7 @@ const withAuth = Component => {
       if(isLoadingCurrentUser){
         return (
           <React.Fragment>
-          Loading...
+            <div className="spinner"></div>
           </React.Fragment>
         );
       }

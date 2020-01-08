@@ -42,12 +42,6 @@ export default class PostService {
 		const url = `${API_URL}/api/posts/${username}/emojis/${emoji}?page=${page}`;
 		return axios.get(url).then(response => response);
 	}
-	
-	/*getPostsbyCommunity(community) {
-    console.log("getPostsbyCommunity");
-		const url = `${API_URL}/api/community/posts/${community}`;
-		return axios.get(url).then(response => response);
-	}*/
 
   updatePost(post){
 		console.log('post:'+JSON.stringify(post));

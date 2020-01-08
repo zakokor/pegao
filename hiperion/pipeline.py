@@ -20,7 +20,6 @@ def get_avatar(backend, strategy, details, response,
           image_ext = url.split('.')[-1]
     if url:
         user.photo.save(
-               #image_name, #'{0}.{1}'.format('photo', image_ext),
                '{0}.{1}'.format(image_name, image_ext),
                ContentFile(urlopen(url).read()),
                save=False

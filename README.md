@@ -8,24 +8,23 @@
 I'm developing Pegao with Django, ReactJS and Bulma, trying to keep it simple, and hosted on Digital Ocean.
 
 [Pegao.co](https://pegao.co) already works, but it is still in beta. So far I have built:
-- Post links
-- Lists
-- Likes
-- Followers
+- Post links.
+- Lists of links.
+- Followers.
+- Emoji filter.
 
 And the roapmap at a high level includes: 
+- Likes.
 - Account page features.
-- Emoji filter.
 - Bookmark search.
-- Private bookmarks or private profiles.
-- Follow sources and friends.
+- Private bookmarks / private profiles.
+- Follow sources.
 - Share links in social networks, mail.
 - Page with most popular and most recent links.
 - Customize interests.
 - Spanish language support.
 - Order links and mark them as done.
 - Email notifications (possibly with Celery + Redis + Email service)
-- GraphQL
 
 ...and the list keeps growing, but we will need your help to get there.
 

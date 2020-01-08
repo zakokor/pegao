@@ -1,15 +1,8 @@
 import React, { PureComponent } from "react";
-//import { Route, BrowserRouter, Switch  } from 'react-router-dom';
-//import { Link } from 'react-router-dom';
 import key from "weak-key";
 import throttle from 'lodash.throttle';
-//import Card from './Card';
-//import EmojiFilter from './EmojiFilter';
-//import SearchText from './SearchText';
 import PostService from './PostService';
 import Post from './Postv2';
-//import MenuProfile from './MenuProfile';
-//import CardLists from './CardLists';
 
 const postService = new PostService();
 const waitTime = 1000;
@@ -91,8 +84,8 @@ class Posts extends PureComponent {
     
     return (
       <React.Fragment>
-        <div className="has-padding-10-15 has-box-shado1w has-background1-light">
-          <span className="title is-4 has-padding-le1ft-10">All Posts</span>
+        <div className="has-padding-10-15">
+          <span className="title is-4">All Posts</span>
           {message}
         </div>
         {data && data.map(hit =>

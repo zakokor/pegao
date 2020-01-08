@@ -11,9 +11,6 @@ import Submit from './Submit';
 
 class Routes extends PureComponent {
   render() {
-    //<Route path="/@:username/following"  exact  render={ props => <UserFollowing key={props.match.params.username} {...props} /> } />
-    //<Route path="/:community"  exact render={ props => <CommunityFeed {...props} /> } />
-    
     return (
       <React.Fragment>
         <BrowserRouter>

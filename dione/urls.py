@@ -20,8 +20,6 @@ urlpatterns = [
   path('@<str:pk>/emoji/<str:emoji>', views.profileemoji ),
   path('@<str:pk>', views.profile ),
 
-  #path('<str:pk>', views.community ),
-
   path('', views.index ),
   path('home', views.index ),
 

@@ -1,5 +1,4 @@
 #from django.shortcuts import render
-
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from rest_framework import status
@@ -32,8 +31,6 @@ class CustomPagination(PageNumberPagination):
         
         return Response({
             'next': page_number, #self.get_next_link(),
-            #'next': self.get_next_link(),
-            # 'previous': self.page.previous_page_number() #self.get_previous_link()
             'count': self.page.paginator.count,
             'size': self.page_size,
             'results': data
@@ -45,10 +42,7 @@ class Submit(APIView):
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        #print("hola1",self.request.query_params)
-
         url = self.request.query_params.get('url')
-        #print("url",url)
 
         #inicio para link con caracteres especiales como tildes, etc
         url = urlsplit(url)
@@ -107,13 +101,7 @@ class PostCreate(generics.CreateAPIView):
     #pagination_class = CustomPagination #implementation custom pagination
 
     def perform_create(self, serializer): #se ejecuta en el POST para crear una publicacion
-
-        #print("text",self.request.data["text"])
-
         list = re.findall(r"(?:^|\s)[/]{1}(\w+)", self.request.data["text"], re.UNICODE) #debe iniciar despues de un espacio por ej. mi carro /hola
-        #list = re.findall(r"/(\w+)", self.request.data["text"], re.UNICODE) #no importa si no tiene un espacio al principio por ej. mi carro/hola
-        #print("findall",list)
-        #print("list",list[len(list)-1] if len(list) > 0 else None)
 
         serializer.save(
             author=self.request.user, list=list[len(list)-1] if len(list) > 0 else None) #,emoji=":%s:" % self.request.data["emoji"])
@@ -126,16 +114,8 @@ class PostList(generics.ListAPIView):
     pagination_class = CustomPagination #implementation custom pagination
 
     def get_queryset(self): #consultar
-
-        #print(target)
-        #print('user',self.request.user)
-
         if self.kwargs is not None and 'username' in self.kwargs: #users posts
-          #print('username',self.kwargs["username"])
-
           user_id = User.objects.get(username=self.kwargs["username"])
-          #print('user_id',user_id.id)
-          #print(user_id.query)
           
           queryset = Post.objects.filter(author=user_id).order_by('-created_at','-votes')
           
@@ -147,15 +127,9 @@ class PostList(generics.ListAPIView):
 
           #follower_ids = Follower.objects.filter(follower=self.request.user).values_list('user',flat=True)
           follower_ids = Follower.objects.filter(follower=user_id).values_list('user',flat=True)
-          #print(follower_ids)
-          #print(follower_ids.query)
 
           if follower_ids:
-              #print("hola follower_ids")
               queryset = queryset | Post.objects.filter(author_id__in=follower_ids)
-
-              #print('query:',queryset.query)
-              #print('query:',queryset.explain(verbose=True))
 
           """suscription_ids = Suscription.objects.filter(user=user_id).values_list('source',flat=True)
           if suscription_ids:
@@ -226,33 +200,6 @@ class PostUserEmoji(generics.ListAPIView):
         queryset = Post.objects.filter(author=user_id,emoji=emoji_id).order_by('-created_at','-votes')
 
         return queryset
-      
-"""class PostCommunityList(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
-
-    serializer_class = PostSerializer
-
-    def get_queryset(self): #consultar
-
-
-        print("PostUserList")
-        print('username',self.kwargs["username"])
-        print('list',self.kwargs["list"])
-
-
-        #user_id = self.request.user
-
-        if self.kwargs is not None and 'community' in self.kwargs:
-          print("community",self.kwargs["community"])
-
-          #user_id = User.objects.get(username=self.kwargs["username"])
-          slug = self.kwargs["community"]
-          #community_id = Community.objects.get(slug=self.kwargs["community"])
-
-        queryset = Post.objects.filter(community_slug=slug).order_by('-created_at','-votes')
-
-        return queryset
-"""
 
 class PostActivityView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
@@ -339,25 +286,6 @@ class PostActivityRePostDestroy(generics.DestroyAPIView):
             pass
         return Response(status=status.HTTP_204_NO_CONTENT) #si no ocurre error
 
-"""class AccountRetrieve(generics.RetrieveAPIView):
-    #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
-
-    serializer_class = AccountSerializer
-
-    def get_object(self): #para sobreescribir el parametro pk por el filtro implementado en get_queryset
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset)
-
-        return obj
-
-    def get_queryset(self): #busca el registro con el filtro personalizado
-        print("self.request.user",self.request.user.id)
-
-        queryset = User.objects.filter(pk=self.request.user.id)
-
-        return queryset
-"""
-
 class TopUsersList(generics.ListAPIView):
     #permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
 
@@ -419,14 +347,6 @@ class UserList(generics.ListAPIView):
 
     def get_queryset(self): #consultar
 
-        """
-        print("PostUserList")
-        print('username',self.kwargs["username"])
-        print('list',self.kwargs["list"])
-        """
-
-        #user_id = self.request.user
-
         if self.kwargs is not None and 'username' in self.kwargs:
           print("filtro")
 
@@ -435,32 +355,6 @@ class UserList(generics.ListAPIView):
         queryset = Post.objects.filter(author=user_id,list__isnull=False).distinct('list').order_by('list')
 
         return queryset
-
-#listar las comunidades a las que pertenece un usuario
-"""class UserCommunities(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
-
-    serializer_class = MemberSerializer
-
-    def get_queryset(self): #consultar
-
-
-        print("PostUserList")
-        print('username',self.kwargs["username"])
-        print('list',self.kwargs["list"])
-
-
-        #user_id = self.request.user
-
-        if self.kwargs is not None and 'username' in self.kwargs:
-          print("filtro")
-
-          user_id = User.objects.get(username=self.kwargs["username"])
-
-        queryset = Member.objects.filter(user=user_id)
-
-        return queryset
-"""
 
 class FriendshipListCreate(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
@@ -513,7 +407,6 @@ class FriendshipDestroy(generics.DestroyAPIView):
         queryset = Follower.objects.filter(user=user_id,follower=self.request.user)
 
         return queryset
-
 
 class FollowingList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,) #restringue a que solo se pueda consumir si un usuario está logeado
