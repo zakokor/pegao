@@ -48,6 +48,64 @@ Pasting a link is very simple, write in the address bar of the browser "pegao.co
 <br />
 You can create your own lists —written with a / symbol— with your links to easily categorize them. 
 
+## Development
+
+### Prerequisites
+
+ - [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+ - [Google OAuth 2.0 Client ID](https://console.developers.google.com/apis/credentials)
+
+
+### Install dependencies
+
+```
+  npm install
+  pip install -r requirements.txt
+```
+
+### Install database
+
+After installing PostgreSQL (if you don't already have it installed), update database config in `voyager\registry.py` with your values, eg.
+```
+REG_SECRET_KEY="<randomly generated secret key>"
+REG_DEBUG="True"
+REG_ALLOWED_HOSTS=["127.0.0.1"]
+REG_DATABASE_NAME="postgres"
+REG_DATABASE_USER="postgres"
+REG_DATABASE_PW="123"
+REG_DATABASE_HOST="localhost"
+BUGSNAG_API_KEY=""
+```
+
+#### Migrate database
+
+```
+  python manage.py makemigrations hiperion
+  python manage.py migrate
+```
+
+### Set up Google OAuth
+
+This app uses sign-in with Google so you need to create your won [Google OAuth Client Credetials](https://developers.google.com/identity/protocols/oauth2/web-server). After creating your client update the following keys in `voyager\settings.py`:
+```
+  SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '<Your Client ID>'
+  SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '<Your Client Secret>'
+```
+
+### Start the application
+
+Build the front-end
+```
+  npm run watch
+```
+
+Run the back-end
+```
+  python manage.py runserver
+```
+The app should be running on `http://127.0.0.1:8000/`.
+
+
 ## Copyright
 
 [GNU Affero License](LICENSE) © 2019 [Gonzalo Aragón](https://github.com/zakokor).
