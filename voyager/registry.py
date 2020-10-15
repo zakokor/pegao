@@ -1,8 +1,0 @@
-REG_SECRET_KEY="<randomly generated secret key>"
-REG_DEBUG="True or False"
-REG_ALLOWED_HOSTS="A list of strings representing the host/domain names that this Django site can serve"
-REG_DATABASE_NAME="Database name"
-REG_DATABASE_USER="Username"
-REG_DATABASE_PW="Password"
-REG_DATABASE_HOST="localhost"
-BUGSNAG_API_KEY=""
