@@ -16,7 +16,8 @@ urlpatterns = [
   path('api/activities/<str:post>/vote/destroy', views.PostActivityVoteDestroy.as_view() ),
   path('api/activities/<str:post>/repost', views.PostActivityRePost.as_view() ),
   path('api/activities/<str:post>/repost/destroy', views.PostActivityRePostDestroy.as_view() ),
-
+  path('api/<str:username>/<int:pk>/delete', views.PostDelete.as_view() ), 
+  
   #user api
   path('api/friendships/<str:username>', views.FriendshipListCreate.as_view() ), #lista y crea una relacion como seguidor del usuario logeado con :username
   path('api/friendships/<str:username>/destroy', views.FriendshipDestroy.as_view() ), #elimina una relacion como seguidor del usuario logeado con :username

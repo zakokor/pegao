@@ -12,6 +12,7 @@ from urllib.parse import urlsplit, quote, urlunsplit
 from bs4 import BeautifulSoup
 from django.shortcuts import get_object_or_404
 import re
+from django.contrib.auth.models import User
 
 from hiperion.models import *
 from hiperion.serializers import *
@@ -421,3 +422,17 @@ class FollowingList(generics.ListAPIView):
         queryset = Follower.objects.filter(follower=user_id)
 
         return queryset
+
+class PostDelete(generics.RetrieveDestroyAPIView) :
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+
+    def get_queryset(self): #consultar
+
+        if self.kwargs is not None and 'username' in self.kwargs:
+          user_id = User.objects.get(username=self.kwargs["username"])
+
+        queryset = Post.objects.filter(author=user_id)
+
+        return queryset
+
