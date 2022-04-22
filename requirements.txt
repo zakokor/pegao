@@ -3,7 +3,7 @@ bugsnag==3.5.2
 certifi==2019.3.9
 chardet==3.0.4
 defusedxml==0.6.0
-Django==2.2.20
+Django==2.2.28
 djangorestframework==3.11.2
 idna==2.8
 oauthlib==3.0.1
